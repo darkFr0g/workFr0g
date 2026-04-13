@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Route Sheet Extractor</title>
+<link rel="apple-touch-icon" href="icon.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f4f3f0;--surface:#fff;--surface-2:#f9f8f6;--border:#e2e0da;--border-dark:#c8c5bc;--ink:#1a1917;--ink-2:#3d3b37;--ink-3:#6b6860;--ink-4:#9b9890;--accent-light:#f0efe9;--tag-major-bg:#1a1917;--tag-major-text:#fff;--tag-new-bg:#4a4945;--tag-new-text:#fff;--tag-other-bg:#e2e0da;--tag-other-text:#1a1917;--radius:12px;--radius-sm:8px}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',-apple-system,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 16px 64px;-webkit-font-smoothing:antialiased}
+.container{width:100%;max-width:540px}
+header{margin-bottom:24px}
+.header-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.header-eyebrow-left{display:flex;align-items:center;gap:8px}
+.header-eyebrow-left::before{content:'';display:block;width:20px;height:1px;background:var(--ink-4)}
+.version-tag{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--ink);background:var(--border);padding:3px 8px;border-radius:4px;font-family:'DM Mono',monospace}
+h1{font-size:clamp(24px,6vw,32px);font-weight:700;line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:4px}
+h1 .name{border-bottom:2px solid var(--ink)}
+.subtitle{color:var(--ink-4);font-size:13px;font-weight:400}
+.name-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px}
+.name-box label{display:block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-4);margin-bottom:7px}
+.name-box input{width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none}
+.name-box input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(26,25,23,.08)}
+.name-box input::placeholder{color:var(--ink-4)}
+.drop-zone{background:var(--surface);border:1.5px dashed var(--border-dark);border-radius:var(--radius);padding:40px 24px;text-align:center;cursor:pointer;transition:all .2s ease;margin-bottom:14px}
+.drop-zone.drag-over{border-color:var(--ink);background:var(--accent-light)}
+.drop-icon{font-size:36px;margin-bottom:12px;display:block;animation:float 3.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.drop-zone h2{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.drop-zone p{color:var(--ink-4);font-size:13px}
+.file-label{display:block;margin-top:16px}
+.file-label input[type="file"]{display:none}
+.browse-btn{display:inline-block;background:var(--ink);color:#fff;font-family:inherit;font-size:13px;font-weight:600;padding:10px 28px;border-radius:100px;cursor:pointer;letter-spacing:.02em;transition:opacity .15s}
+.browse-btn:active{opacity:.75}
+.status-bar{display:none;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:13px;font-weight:500;color:var(--ink-3)}
+.status-bar.visible{display:flex}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--ink-4)}
+.status-dot.processing{background:var(--ink-3);animation:pulse 1s infinite}
+.status-dot.success{background:var(--ink)}
+.status-dot.error{background:#c0392b}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.cci-bar{display:none;background:var(--ink);color:#fff;border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.cci-bar.visible{display:flex}
+.cci-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.45);white-space:nowrap;padding-top:1px;flex-shrink:0}
+.cci-list{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;font-weight:500;font-family:'DM Mono',monospace;line-height:1.4}
+.cci-entry{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.cci-name{color:#fff;font-weight:600}
+.cci-status-in{color:rgba(255,255,255,.7);font-size:11px;font-weight:800}
+.cci-status-out{color:rgba(255,255,255,.45);font-size:11px;font-weight:800}
+.cci-status-tlc{color:rgba(255,255,255,.38);font-size:11px;font-weight:800}
+.results-header{display:none;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 2px}
+.results-header.visible{display:flex}
+.results-title{font-size:10px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.12em}
+.job-count{background:var(--ink);color:#fff;font-size:11px;font-weight:600;padding:3px 12px;border-radius:100px}
+.jobs-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.job-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:slideIn .3s ease forwards;opacity:0;transform:translateY(10px)}
+.job-card:nth-child(1){animation-delay:.04s}.job-card:nth-child(2){animation-delay:.09s}.job-card:nth-child(3){animation-delay:.14s}.job-card:nth-child(4){animation-delay:.19s}.job-card:nth-child(5){animation-delay:.24s}
+@keyframes slideIn{to{opacity:1;transform:translateY(0)}}
+.card-header{padding:14px 16px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.job-location{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.3;flex:1}
+.job-type-badge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0;letter-spacing:.05em;text-transform:uppercase}
+.type-major{background:var(--tag-major-bg);color:var(--tag-major-text)}
+.type-new{background:var(--tag-new-bg);color:var(--tag-new-text)}
+.type-other{background:var(--tag-other-bg);color:var(--tag-other-text)}
+.card-primary{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.primary-field{padding:12px 16px;display:flex;flex-direction:column;gap:3px}
+.primary-field:first-child{border-right:1px solid var(--border)}
+.primary-field .field-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-4)}
+.primary-field .field-value{font-size:14px;font-weight:700;color:var(--ink);font-family:'DM Mono',monospace;line-height:1.3;word-break:break-word}
+.primary-field .field-value.plain{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600}
+.primary-field .field-value.empty{color:var(--border-dark);font-weight:400;font-size:13px;font-family:inherit}
+.card-foreman{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:2px}
+.card-foreman .field-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-4)}
+.card-foreman .foreman-company{font-size:11px;font-weight:700;color:var(--ink-4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px}
+.card-foreman .field-value{font-size:14px;font-weight:600;color:var(--ink-2);line-height:1.3}
+.card-foreman .field-value.empty{color:var(--ink-4);font-weight:400;font-size:13px}
+.card-fields{display:grid;grid-template-columns:1fr 1fr;padding:12px 16px;gap:12px 14px}
+.field{display:flex;flex-direction:column;gap:3px}
+.field-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-4)}
+.field-value{font-size:13px;font-weight:500;color:var(--ink-3);word-break:break-word;line-height:1.4}
+.field-value.empty{color:var(--border-dark)}
+.field-value.mono{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-2)}
+.action-row{display:none;margin-bottom:20px}
+.action-row.visible{display:block}
+.reset-btn{width:100%;border-radius:var(--radius);padding:15px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;transition:opacity .15s;background:var(--surface);border:1px solid var(--border);color:var(--ink-3)}
+.reset-btn:active{opacity:.7}
+.no-jobs{display:none;text-align:center;padding:36px;color:var(--ink-4);font-size:15px}
+.no-jobs.visible{display:block}
+footer{margin-top:32px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center}
+.footer-title{font-size:11px;font-weight:700;color:var(--ink-4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.footer-desc{font-size:12px;color:var(--ink-4);line-height:1.6;max-width:340px;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="header-eyebrow">
+      <div class="header-eyebrow-left">Construction Rep &middot; Tool #2</div>
+      <span class="version-tag">v4.5</span>
+    </div>
+    <h1>Work Locations for <span class="name" id="headingName">Jeremiah Flavin</span></h1>
+    <p class="subtitle">Daily route sheet extractor for field reps</p>
+  </header>
+  <div class="name-box" id="nameBox">
+    <label for="inspectorInput">Inspector Name</label>
+    <input type="text" id="inspectorInput" value="Jeremiah Flavin" placeholder="Enter inspector name&hellip;" autocomplete="off" spellcheck="false">
+  </div>
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-icon">&#x1F4CB;</span>
+    <h2>Drop route sheet here</h2>
+    <p>Tap to browse &middot; .xlsx files only</p>
+    <label class="file-label">
+      <input type="file" id="fileInput" accept=".xlsx,.xls">
+      <span class="browse-btn">Browse File</span>
+    </label>
+  </div>
+  <div class="status-bar" id="statusBar"><div class="status-dot" id="statusDot"></div><span id="statusText"></span></div>
+  <div class="cci-bar" id="cciBar"><span class="cci-label">CCI</span><div class="cci-list" id="cciList"></div></div>
+  <div class="results-header" id="resultsHeader"><span class="results-title">Your Assignments</span><span class="job-count" id="jobCount"></span></div>
+  <div class="jobs-grid" id="jobsGrid"></div>
+  <div class="no-jobs" id="noJobs"></div>
+  <div class="action-row" id="actionRow"><button class="reset-btn" id="resetBtn">&#x21A9; Load another file</button></div>
+  <footer>
+    <div class="footer-title">About This Tool</div>
+    <div class="footer-desc">Instantly filters the daily route sheet to show only your assigned jobs. Upload the .xlsx each morning to get your work orders, locations, and permit details in one clean view.</div>
+  </footer>
+</div>
+<script>
+(function(){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=function(){initApp()};s.onerror=function(){var s2=document.createElement('script');s2.src='https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js';s2.onload=function(){initApp()};s2.onerror=function(){document.getElementById('statusText').textContent='Failed to load library.';document.getElementById('statusBar').classList.add('visible');document.getElementById('statusDot').className='status-dot error'};document.head.appendChild(s2)};document.head.appendChild(s)})();
+function initApp(){
+var DEFAULT_NAME='Jeremiah Flavin';
+var inspectorInput=document.getElementById('inspectorInput');
+var headingName=document.getElementById('headingName');
+var nameBox=document.getElementById('nameBox');
+var dropZone=document.getElementById('dropZone');
+var fileInput=document.getElementById('fileInput');
+var statusBar=document.getElementById('statusBar');
+var statusDot=document.getElementById('statusDot');
+var statusText=document.getElementById('statusText');
+var cciBar=document.getElementById('cciBar');
+var cciList=document.getElementById('cciList');
+var resultsHeader=document.getElementById('resultsHeader');
+var jobCount=document.getElementById('jobCount');
+var jobsGrid=document.getElementById('jobsGrid');
+var noJobs=document.getElementById('noJobs');
+var actionRow=document.getElementById('actionRow');
+var resetBtn=document.getElementById('resetBtn');
+inspectorInput.addEventListener('input',function(){headingName.textContent=this.value.trim()||DEFAULT_NAME});
+dropZone.addEventListener('dragover',function(e){e.preventDefault();e.stopPropagation();dropZone.classList.add('drag-over')});
+dropZone.addEventListener('dragleave',function(e){e.preventDefault();dropZone.classList.remove('drag-over')});
+dropZone.addEventListener('drop',function(e){e.preventDefault();e.stopPropagation();dropZone.classList.remove('drag-over');var f=e.dataTransfer.files[0];if(f)processFile(f)});
+fileInput.addEventListener('change',function(){if(this.files&&this.files[0])processFile(this.files[0])});
+resetBtn.addEventListener('click',function(){location.reload()});
+function setStatus(t,m){statusBar.classList.add('visible');statusDot.className='status-dot '+t;statusText.textContent=m}
+function fmt(n){if(!n)return'';var p=n.trim().split(/\s+/);if(p.length===1)return p[0];return p[0].charAt(0).toUpperCase()+'. '+p[p.length-1]}
+function parseCCIs(wb){var ccis=[];var ss=wb.Sheets['Summary'];if(!ss)return ccis;var rows=XLSX.utils.sheet_to_json(ss,{header:1,defval:null});var hi=-1;for(var i=0;i<rows.length;i++){if(rows[i][2]&&String(rows[i][2]).toLowerCase().indexOf('cci')!==-1&&rows[i][3]&&String(rows[i][3]).toLowerCase().indexOf('in')!==-1){hi=i;break}}if(hi===-1)return ccis;for(var j=hi+1;j<rows.length;j++){var nm=rows[j][2],st=rows[j][3];if(!nm||String(nm).trim()==='')break;ccis.push({name:String(nm).trim(),status:String(st||'').trim()})}return ccis}
+function renderCCIs(ccis){if(!ccis||ccis.length===0)return;cciList.innerHTML='';ccis.forEach(function(c){var el=document.createElement('span');el.className='cci-entry';var sl=c.status.toLowerCase();var sc=sl==='in'?'cci-status-in':sl==='out'?'cci-status-out':'cci-status-tlc';var icon=sl==='in'?'&#10004;':sl==='out'?'&#10006;':'~';el.innerHTML='<span class="cci-name">'+fmt(c.name)+'</span><span class="'+sc+'">'+c.status.toUpperCase()+'&nbsp;'+icon+'</span>';cciList.appendChild(el)});cciBar.classList.add('visible')}
+function processFile(file){
+var NAME=inspectorInput.value.trim()||DEFAULT_NAME;
+setStatus('processing','Reading file\u2026');
+dropZone.style.display='none';nameBox.style.display='none';
+var reader=new FileReader();
+reader.onload=function(e){
+try{
+var wb=XLSX.read(new Uint8Array(e.target.result),{type:'array',cellDates:true});
+var fd='';for(var i=0;i<wb.SheetNames.length;i++){var s=wb.Sheets[wb.SheetNames[i]];if(s&&s['B2']&&s['B2'].v){fd=String(s['B2'].v);break}}
+renderCCIs(parseCCIs(wb));
+var allH=null,jobs=[],seen={};
+for(var si=0;si<wb.SheetNames.length;si++){
+var ws=wb.Sheets[wb.SheetNames[si]];
+var rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:null});
+if(rows.length<2)continue;
+var co=(rows[1]&&rows[1][4])?String(rows[1][4]).trim():'';
+var hi=-1,ci=-1;
+for(var i2=0;i2<Math.min(rows.length,10);i2++){var idx=rows[i2].indexOf('Covering Inspector');if(idx!==-1){hi=i2;ci=idx;break}}
+if(hi===-1)continue;
+if(!allH)allH=rows[hi];
+for(var r=hi+1;r<rows.length;r++){var row=rows[r],val=row[ci];if(val&&String(val).trim()===NAME){var key=String(row[allH.indexOf('Ticket #')]||'')+'|'+String(row[allH.indexOf('Location')]||'');if(!seen[key]){seen[key]=true;var jr=row.slice();jr._co=co;jobs.push(jr)}}}}
+if(!allH)throw new Error('No "Covering Inspector" column found.');
+renderJobs(allH,jobs,NAME,fd);
+}catch(err){setStatus('error','Error: '+err.message);dropZone.style.display='';nameBox.style.display=''}};
+reader.onerror=function(){setStatus('error','Could not read file.');dropZone.style.display='';nameBox.style.display=''};
+reader.readAsArrayBuffer(file)}
+function fv(row,headers,name){var i=headers.indexOf(name);if(i===-1||row[i]==null||row[i]===''||row[i]===0)return null;return String(row[i]).trim()}
+function renderJobs(headers,jobs,inspectorName,fd){
+jobsGrid.innerHTML='';
+if(jobs.length===0){setStatus('success','No jobs found for '+inspectorName+'.');noJobs.textContent='No jobs assigned to '+inspectorName+' in this sheet.';noJobs.classList.add('visible');actionRow.classList.add('visible');return}
+setStatus('success','Found '+jobs.length+' job'+(jobs.length!==1?'s':'')+' for '+inspectorName+(fd?'  \u00B7  '+fd:''));
+resultsHeader.classList.add('visible');
+jobCount.textContent=jobs.length+' job'+(jobs.length!==1?'s':'');
+jobs.forEach(function(row){
+var loc=fv(row,headers,'Location')||'\u2014';
+var tw=fv(row,headers,'Type Of Work')||'';
+var wd=fv(row,headers,'Work Description');
+var tk=fv(row,headers,'Ticket #');
+var wo=fv(row,headers,'Layout/CWORX Work Order #');
+var fm=fv(row,headers,"Contractor's Foreman");
+var ph=fv(row,headers,'Permit Hours');
+var pf=fv(row,headers,'PSC File #');
+var ci=fv(row,headers,'CCI');
+var cg=fv(row,headers,'Contingency (Y/N)');
+var cn=fv(row,headers,'Contingency #');
+var cgf=cg?cg+(cn?' \u00B7 '+cn:''):null;
+var c7=fv(row,headers,'Code 753');
+var co=row._co||null;
+var twl=tw.toLowerCase();
+var bc=twl.indexOf('major')!==-1?'type-major':twl.indexOf('new')!==-1?'type-new':'type-other';
+var card=document.createElement('div');
+card.className='job-card';
+card.innerHTML=
+'<div class="card-header"><div class="job-location">'+loc+'</div>'+(tw?'<span class="job-type-badge '+bc+'">'+tw+'</span>':'')+'</div>'+
+'<div class="card-primary"><div class="primary-field"><span class="field-label">Ticket #</span><span class="field-value '+(tk?'':'empty')+'">'+(tk||'N/A')+'</span></div><div class="primary-field"><span class="field-label">Contingency</span><span class="field-value plain '+(cgf?'':'empty')+'">'+(cgf||'N/A')+'</span></div></div>'+
+'<div class="card-foreman"><span class="field-label">Foreman</span>'+(co?'<span class="foreman-company">'+co+'</span>':'')+'<span class="field-value'+(fm?'':' empty')+'">'+(fm||'N/A')+'</span></div>'+
+'<div class="card-fields">'+
+'<div class="field"><span class="field-label">Work Description</span><span class="field-value'+(wd?'':' empty')+'">'+(wd||'N/A')+'</span></div>'+
+'<div class="field"><span class="field-label">Work Order #</span><span class="field-value mono'+(wo?'':' empty')+'">'+(wo||'N/A')+'</span></div>'+
+'<div class="field"><span class="field-label">Permit Hours</span><span class="field-value mono'+(ph?'':' empty')+'">'+(ph||'N/A')+'</span></div>'+
+'<div class="field"><span class="field-label">PSC File #</span><span class="field-value'+(pf?'':' empty')+'">'+(pf||'N/A')+'</span></div>'+
+'<div class="field"><span class="field-label">CCI</span><span class="field-value'+(ci?'':' empty')+'">'+(ci||'N/A')+'</span></div>'+
+'<div class="field"><span class="field-label">Code 753</span><span class="field-value mono'+(c7?'':' empty')+'">'+(c7||'N/A')+'</span></div>'+
+'</div>';
+jobsGrid.appendChild(card)});
+actionRow.classList.add('visible')}
+}
+</script>
+</body>
+</html>

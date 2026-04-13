@@ -1,0 +1,43 @@
+{
+  "name": "Field Hub — Con Ed / XCMG",
+  "short_name": "Field Hub",
+  "description": "Gas utility construction field tools for Con Edison / XCMG in the Bronx.",
+  "start_url": "/workFr0g/",
+  "scope": "/workFr0g/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f1117",
+  "theme_color": "#0f1117",
+  "lang": "en-US",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "XCMG Gas Reference",
+      "short_name": "Gas Ref",
+      "description": "Search gas construction items",
+      "url": "/workFr0g/xcmg-reference/",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Quick Reference",
+      "short_name": "Quick Ref",
+      "description": "Stip schedule, pressure testing, conversions",
+      "url": "/workFr0g/quick-reference/",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
