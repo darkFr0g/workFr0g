@@ -1,4 +1,4 @@
-# Field Hub — Con Ed / XCMG
+# Field Hub — XCMG
 
 Personal PWA hub for gas utility construction field tools.  
 Dark theme · Mobile-first · Offline-capable · GitHub Pages hosted.
