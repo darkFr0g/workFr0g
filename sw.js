@@ -16,6 +16,7 @@ const PRECACHE_URLS = [
   '/workFr0g/quick-reference/index.html',
   '/workFr0g/gas-symbols/index.html',
   '/workFr0g/charging-guide/index.html',
+  '/workFr0g/icons/icon-180.png',
   '/workFr0g/icons/icon-192.png',
   '/workFr0g/icons/icon-512.png',
 ];

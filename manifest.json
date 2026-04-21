@@ -38,6 +38,20 @@
       "description": "Stip schedule, pressure testing, conversions",
       "url": "/workFr0g/quick-reference/",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Gas Symbols",
+      "short_name": "Symbols",
+      "description": "Drawing symbols reference",
+      "url": "/workFr0g/gas-symbols/",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Charging Guide",
+      "short_name": "Charging",
+      "description": "POET codes and classifications",
+      "url": "/workFr0g/charging-guide/",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
