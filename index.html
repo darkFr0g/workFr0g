@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1117" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Field Hub" />
+  <meta name="description" content="Con Edison / XCMG field work tools hub for gas utility construction in the Bronx." />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <title>Field Hub</title>
+
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0f1117;
+      --bg-card:    #161b24;
+      --bg-card-h:  #1c2333;
+      --border:     #1f2937;
+      --border-h:   #2d3a4f;
+      --border2:    #363b50;
+      --blue:       #4ab3e8;
+      --blue-dim:   #2a6a8a;
+      --blue-glow:  rgba(74,179,232,.15);
+      --text:       #e2e8f0;
+      --text-muted: #64748b;
+      --text-dim:   #94a3b8;
+      --muted:      #7b82a0;
+      --red:        #e84a4a;
+      --amber:      #e8a34a;
+      --green:      #4ae87a;
+      --purple:     #a44ae8;
+      --coned:      #4ab3e8;
+      --font:       -apple-system, "SF Pro Text", "Helvetica Neue", sans-serif;
+      --font-mono:  "SF Mono", "Fira Code", monospace;
+      --radius:     12px;
+      --safe-top:   env(safe-area-inset-top, 0px);
+      --safe-bot:   env(safe-area-inset-bottom, 0px);
+    }
+
+    html { background: var(--bg); }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      padding-top: calc(var(--safe-top) + 0px);
+      padding-bottom: calc(var(--safe-bot) + 24px);
+      overflow-x: hidden;
+    }
+
+    /* ── Subtle grid texture ────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(74,179,232,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,179,232,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,17,23,.88);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px 12px;
+      padding-top: calc(14px + var(--safe-top));
+    }
+
+    .header-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-titles { flex: 1; min-width: 0; }
+
+    .header-titles h1 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.2px;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .header-titles p {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: .2px;
+      margin-top: 1px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      flex-shrink: 0;
+    }
+
+    .status-dot.offline {
+      background: var(--red);
+      box-shadow: 0 0 6px var(--red);
+    }
+
+    /* ── Top nav bar (shared across all tools) ──────────────── */
+    .sitenav {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: #07090f;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 12px;
+      height: 40px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .sitenav::-webkit-scrollbar { display: none; }
+    .sitenav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0 10px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+    .sitenav a:hover { color: var(--text); }
+    .sitenav a.active {
+      color: var(--coned);
+      border-bottom-color: var(--coned);
+    }
+    .sitenav a.hub-link {
+      color: var(--text);
+      font-weight: 800;
+    }
+    .sitenav a.hub-link.active { color: var(--coned); }
+    .nav-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border2);
+      flex-shrink: 0;
+      margin: 0 2px;
+    }
+
+    /* ── Main ───────────────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 20px 16px 0;
+    }
+
+    /* ── Section label ──────────────────────────────────────── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      padding-left: 2px;
+    }
+
+    /* ── Tool grid ──────────────────────────────────────────── */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .tool-grid.wide { grid-template-columns: 1fr; }
+
+    /* ── Tool card ──────────────────────────────────────────── */
+    .tool-card {
+      display: block;
+      text-decoration: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 14px 14px;
+      transition: background .15s, border-color .15s, transform .12s;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity .2s;
+      pointer-events: none;
+    }
+
+    .tool-card:active { transform: scale(.97); }
+
+    .tool-card:hover,
+    .tool-card:focus-visible {
+      background: var(--bg-card-h);
+      border-color: var(--border-h);
+      outline: none;
+    }
+
+    /* accent stripe */
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--card-accent, var(--blue));
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .card-icon {
+      font-size: 22px;
+      line-height: 1;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.1px;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .card-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(74,179,232,.12);
+      color: var(--blue);
+    }
+
+    .card-badge.offline-ok {
+      background: rgba(74,232,122,.1);
+      color: var(--green);
+    }
+
+    .card-badge.wip {
+      background: rgba(232,163,74,.1);
+      color: var(--amber);
+    }
+
+    /* ── Info bar ───────────────────────────────────────────── */
+    .info-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .info-bar-icon { font-size: 18px; flex-shrink: 0; }
+
+    .info-bar-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .info-bar-text strong { color: var(--text-dim); font-weight: 600; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      max-width: 640px;
+      margin: 8px auto 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: .2px;
+    }
+
+    .footer-version {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* ── Install banner ─────────────────────────────────────── */
+    #install-banner {
+      display: none;
+      position: fixed;
+      bottom: calc(16px + var(--safe-bot));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      background: var(--bg-card);
+      border: 1px solid var(--blue-dim);
+      border-radius: 14px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.5);
+      max-width: calc(100vw - 32px);
+      width: 360px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #install-banner.show { display: flex; }
+
+    #install-banner p {
+      font-size: 12px;
+      color: var(--text-dim);
+      flex: 1;
+    }
+
+    #install-banner p strong { color: var(--text); }
+
+    #install-btn {
+      background: var(--blue);
+      color: #0f1117;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    #install-dismiss {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0 2px;
+      line-height: 1;
+    }
+
+    /* ── Offline toast ──────────────────────────────────────── */
+    #offline-toast {
+      display: none;
+      position: fixed;
+      top: calc(110px + var(--safe-top));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 300;
+      background: #1a1215;
+      border: 1px solid var(--red);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--red);
+      white-space: nowrap;
+    }
+
+    #offline-toast.show { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <div class="header-titles">
+      <h1>Field Hub</h1>
+      <p>Con Edison · XCMG · Bronx Gas Utility</p>
+    </div>
+    <div class="status-dot" id="statusDot" title="Online"></div>
+  </div>
+</header>
+
+<!-- ── Top nav bar ─────────────────────────────────────────── -->
+<nav class="sitenav">
+  <a href="index.html" class="hub-link active">⌂ Hub</a>
+  <div class="nav-divider"></div>
+  <a href="xcmg-reference/index.html">⚒ Items</a>
+  <a href="quick-reference/index.html">📋 Quick Ref</a>
+  <a href="gas-symbols/index.html">🗺 Symbols</a>
+  <a href="charging-guide/index.html">💰 Charging</a>
+</nav>
+
+<!-- ── Offline toast ───────────────────────────────────────── -->
+<div id="offline-toast">⚡ Offline — cached tools available</div>
+
+<!-- ── Main ────────────────────────────────────────────────── -->
+<main>
+
+  <!-- Active tools -->
+  <div class="section-label">Tools</div>
+  <div class="tool-grid">
+
+    <a class="tool-card" href="xcmg-reference/index.html"
+       style="--card-accent: #4ab3e8;">
+      <span class="card-icon">⚒</span>
+      <div class="card-title">XCMG Items</div>
+      <div class="card-desc">Item search, tag filters, list/grid/group views</div>
+      <span class="card-badge offline-ok">Offline ✓</span>
+    </a>
+
+    <a class="tool-card" href="quick-reference/index.html"
+       style="--card-accent: #4ae87a;">
+      <span class="card-icon">📋</span>
+      <div class="card-title">Quick Reference</div>
+      <div class="card-desc">Stip schedule, pressure testing, conversions, UG clearances</div>
+      <span class="card-badge offline-ok">Offline ✓</span>
+    </a>
+
+    <a class="tool-card" href="gas-symbols/index.html"
+       style="--card-accent: #a44ae8;">
+      <span class="card-icon">🗺</span>
+      <div class="card-title">Gas Symbols</div>
+      <div class="card-desc">Drawing symbols reference for field documentation</div>
+      <span class="card-badge offline-ok">Offline ✓</span>
+    </a>
+
+    <a class="tool-card" href="charging-guide/index.html"
+       style="--card-accent: #e8a34a;">
+      <span class="card-icon">💰</span>
+      <div class="card-title">Charging Guide</div>
+      <div class="card-desc">POET codes: Capital, O&amp;M, Retirement classifications</div>
+      <span class="card-badge offline-ok">Offline ✓</span>
+    </a>
+
+  </div>
+
+  <!-- Coming soon -->
+  <div class="section-label">Coming Soon</div>
+  <div class="tool-grid">
+
+    <a class="tool-card" href="#" onclick="return false;"
+       style="--card-accent: #e8a34a; opacity:.65; cursor:default;">
+      <span class="card-icon">🚗</span>
+      <div class="card-title">Mileage Tracker</div>
+      <div class="card-desc">Route logging between Bronx job sites</div>
+      <span class="card-badge wip">In Progress</span>
+    </a>
+
+    <a class="tool-card" href="#" onclick="return false;"
+       style="--card-accent: #a44ae8; opacity:.65; cursor:default;">
+      <span class="card-icon">📝</span>
+      <div class="card-title">Daily Log (DLR)</div>
+      <div class="card-desc">Crew activity, WO/WR, T&amp;E, equipment logging</div>
+      <span class="card-badge wip">In Progress</span>
+    </a>
+
+    <a class="tool-card" href="#" onclick="return false;"
+       style="--card-accent: #e84a4a; opacity:.65; cursor:default;">
+      <span class="card-icon">⛽</span>
+      <div class="card-title">Gas Service Form</div>
+      <div class="card-desc">As-constructed SaC1/SaC2 documentation</div>
+      <span class="card-badge wip">Planned</span>
+    </a>
+
+    <a class="tool-card" href="#" onclick="return false;"
+       style="--card-accent: #4ae8d4; opacity:.65; cursor:default;">
+      <span class="card-icon">👷</span>
+      <div class="card-title">Crew Roster</div>
+      <div class="card-desc">Foreman, operators, laborers, flaggers</div>
+      <span class="card-badge wip">Planned</span>
+    </a>
+
+  </div>
+
+  <!-- Info -->
+  <div class="info-bar">
+    <div class="info-bar-icon">📱</div>
+    <div class="info-bar-text">
+      <strong>Add to Home Screen</strong> for full-screen use and offline access.
+      On iPhone: Share → Add to Home Screen.
+    </div>
+  </div>
+
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer>
+  <span class="footer-text">Bronx · Queens Territory</span>
+  <span class="footer-version">v1.1.0</span>
+</footer>
+
+<!-- ── Install banner (Android / Chrome) ───────────────────── -->
+<div id="install-banner">
+  <p><strong>Install Field Hub</strong><br>Add to home screen for offline use</p>
+  <button id="install-btn">Install</button>
+  <button id="install-dismiss">✕</button>
+</div>
+
+<script>
+  // ── Service Worker registration ───────────────────────────
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(r => console.log('[SW] registered', r.scope))
+        .catch(e => console.warn('[SW] registration failed', e));
+    });
+  }
+
+  // ── Online / offline indicator ────────────────────────────
+  const dot   = document.getElementById('statusDot');
+  const toast = document.getElementById('offline-toast');
+
+  function updateNetStatus() {
+    const online = navigator.onLine;
+    dot.className = 'status-dot' + (online ? '' : ' offline');
+    dot.title      = online ? 'Online' : 'Offline';
+    toast.className = online ? '' : 'show';
+    if (!online) setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  window.addEventListener('online',  updateNetStatus);
+  window.addEventListener('offline', updateNetStatus);
+  updateNetStatus();
+
+  // ── PWA install prompt (Android / Chrome) ─────────────────
+  let deferredPrompt;
+  const banner     = document.getElementById('install-banner');
+  const installBtn = document.getElementById('install-btn');
+  const dismissBtn = document.getElementById('install-dismiss');
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    banner.classList.add('show');
+  });
+
+  installBtn.addEventListener('click', async () => {
+    banner.classList.remove('show');
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log('[PWA] install outcome:', outcome);
+    deferredPrompt = null;
+  });
+
+  dismissBtn.addEventListener('click', () => {
+    banner.classList.remove('show');
+  });
+
+  window.addEventListener('appinstalled', () => {
+    banner.classList.remove('show');
+    deferredPrompt = null;
+    console.log('[PWA] installed');
+  });
+</script>
+
+</body>
+</html>
