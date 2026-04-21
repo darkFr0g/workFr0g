@@ -384,46 +384,82 @@ body {
 #itemsList { display: none; }
 #itemsGroup { display: none; }
 
-.list-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: auto;
-}
-.list-table thead th {
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+/* ── LIST VIEW — ROW BASED (no table, no horizontal scroll) ── */
+.list-row {
+  display: flex;
+  align-items: flex-start;
   padding: 9px 12px;
-  text-align: left;
-  border-bottom: 2px solid var(--border);
-  white-space: nowrap;
-}
-.list-table tbody tr {
   border-bottom: 1px solid var(--border);
+  gap: 10px;
   transition: background 0.1s;
+  min-width: 0;
 }
-.list-table tbody tr:hover { background: var(--surface); }
-.list-table td {
-  padding: 8px 12px;
-  font-size: 13px;
-  vertical-align: middle;
-  white-space: nowrap;
+.list-row:hover { background: var(--surface); }
+
+.row-accent {
+  width: 3px;
+  min-width: 3px;
+  border-radius: 2px;
+  align-self: stretch;
+  margin-top: 2px;
 }
-.lt-code {
+
+.row-star {
+  font-size: 12px;
+  min-width: 16px;
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+
+.row-code {
   font-family: var(--mono);
   font-size: 13px;
   font-weight: 700;
   color: var(--text);
   white-space: nowrap;
+  min-width: 70px;
+  flex-shrink: 0;
+  padding-top: 1px;
 }
-.lt-desc { color: #ffffff; white-space: normal; min-width: 260px; }
-.lt-unit { font-family: var(--mono); font-size: 12px; color: #ffffff; white-space: nowrap; }
-.lt-type { white-space: nowrap; }
-.lt-note { font-size: 11px; color: var(--c-common); white-space: normal; min-width: 160px; }
-.lt-star { color: var(--c-common); font-size: 13px; width: 24px; padding-right: 4px; }
+
+.row-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.row-desc {
+  font-size: 13px;
+  color: #ffffff;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.row-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.row-unit {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.row-note {
+  font-size: 11px;
+  color: var(--c-common);
+  line-height: 1.3;
+}
+
+/* desktop: show extra info inline */
+@media (min-width: 601px) {
+  .row-code { min-width: 90px; }
+}
 
 /* ── GROUP VIEW ── */
 
@@ -516,19 +552,6 @@ body {
   /* Bigger tap targets on search */
   #searchInput { font-size: 16px; } /* prevents iOS zoom on focus */
 
-  /* Table: hide type + note columns on mobile */
-  .list-table th:nth-child(4),
-  .list-table td:nth-child(4),
-  .list-table th:nth-child(5),
-  .list-table td:nth-child(5),
-  .list-table th:nth-child(6),
-  .list-table td:nth-child(6) { display: none; }
-
-  /* Make code column narrower */
-  .lt-code { font-size: 12px; }
-  .lt-desc { font-size: 12px; }
-  .lt-star { width: 18px; padding-right: 2px; }
-
   /* Tighter padding on mobile */
   .main { padding: 8px 10px 40px; }
   .controls { padding: 8px 10px; gap: 6px; }
@@ -555,10 +578,13 @@ body {
 <nav class="sitenav">
   <a href="../index.html" class="hub-link">⌂ Hub</a>
   <div class="nav-divider"></div>
-  <a href="index.html" class="active">⚒ Items</a>
-  <a href="../quick-reference/index.html">📋 Quick Ref</a>
-  <a href="../gas-symbols/index.html">🗺 Symbols</a>
-  <a href="../charging-guide/index.html">💰 Charging</a>
+  <a href="index.html" class="active">⚒ Item Search</a>
+  <div class="nav-divider"></div>
+  <a href="../quick-reference/index.html">📋 Quick Reference</a>
+  <div class="nav-divider"></div>
+  <a href="../gas-symbols/index.html">🗺 Gas Symbols</a>
+  <div class="nav-divider"></div>
+  <a href="../charging-guide/index.html">💰 Charging Guide</a>
 </nav>
 
 <header class="header">
@@ -599,7 +625,7 @@ body {
 
 <div class="main">
   <div id="itemsGrid"></div>
-  <div id="itemsList"><table class="list-table"><thead><tr><th></th><th>Code</th><th>Description</th><th>Unit</th><th>Type</th><th>Note</th></tr></thead><tbody id="listBody"></tbody></table></div>
+  <div id="itemsList"><div id="listBody"></div></div>
   <div id="itemsGroup"></div>
 </div>
 
@@ -1041,7 +1067,8 @@ function cardHtml(item) {
     : '';
 
   const noteHtml = item.note
-    ? `<div class="card-note">${item.note}</div>` : '';
+    ? `<div class="card-note">${(item.note).replace(/—/g,'&#8212;')}</div>` : '';
+  const cardDesc = (item.desc||'').replace(/—/g,'&#8212;').replace(/×/g,'&#215;');
 
   return `<div class="card">
     <div class="card-accent" style="background:${color}"></div>
@@ -1053,7 +1080,7 @@ function cardHtml(item) {
           ${typeBadgeHtml(item.type)}
         </div>
       </div>
-      <div class="card-desc">${item.desc}</div>
+      <div class="card-desc">${cardDesc}</div>
       ${noteHtml}
       <div class="card-foot">
         <span class="unit-pill">${UNIT_FULL[item.unit]||item.unit}</span>
@@ -1155,14 +1182,23 @@ function render() {
       const pc = primaryCat(item);
       const color = catColor(pc);
       const isCommon = COMMON.has(item.code);
-      return `<tr>
-        <td class="lt-star">${isCommon ? '⭐' : ''}</td>
-        <td class="lt-code" style="border-left:3px solid ${color};padding-left:10px">${item.code}</td>
-        <td class="lt-desc">${item.desc}</td>
-        <td class="lt-unit">${UNIT_FULL[item.unit]||item.unit}</td>
-        <td class="lt-type">${typeBadgeHtml(item.type)}</td>
-        <td class="lt-note">${item.note||''}</td>
-      </tr>`;
+      const noteLine = item.note ? `<div class="row-note">${item.note}</div>` : '';
+      const typeLine = item.type ? typeBadgeHtml(item.type) : '';
+      const desc = (item.desc || '').replace(/—/g, '&#8212;').replace(/×/g, '&#215;');
+      const note = (item.note || '').replace(/—/g, '&#8212;');
+      return `<div class="list-row">
+        <div class="row-accent" style="background:${color}"></div>
+        <div class="row-star">${isCommon ? '⭐' : ''}</div>
+        <div class="row-code">${item.code}</div>
+        <div class="row-body">
+          <div class="row-desc">${desc}</div>
+          <div class="row-meta">
+            <span class="row-unit">${UNIT_FULL[item.unit]||item.unit}</span>
+            ${typeLine}
+          </div>
+          ${note ? `<div class="row-note">${note}</div>` : ''}
+        </div>
+      </div>`;
     }).join('');
 
   } else if (activeView === 'group') {
