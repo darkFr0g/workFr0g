@@ -87,8 +87,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
           <tr><td class="lbl">7am – 6pm</td><td class="val">1.0</td><td class="val">1.0</td><td class="val">1.0</td><td class="val">1.0</td></tr>
           <tr><td class="lbl">9am – 2pm</td><td class="val">1.3</td><td class="val">1.3</td><td class="val">1.3</td><td class="val">1.3</td></tr>
           <tr><td class="lbl">9am – 3pm</td><td class="val">1.2</td><td class="val">1.2</td><td class="val">1.2</td><td class="val">1.2</td></tr>
-          <tr><td class="lbl">9am – 4pm</td><td class="val">1.1</td><td class="val">1.1</td><td class="val">1.1</td><td class="val">1.1</td></tr>
-          <tr><td class="lbl">10am – 2pm</td><td class="val">1.4</td><td class="val">1.4</td><td class="val">1.4</td><td class="val">1.4</td></tr>
+          <tr><td class="lbl">9am – 4pm</td><td class="val">1.1</td><td class="val">1.1</td><td class="val gold">1.15</td><td class="val">1.1</td></tr>
+          <tr><td class="lbl">10am – 2pm</td><td class="val gold">1.5</td><td class="val">1.4</td><td class="val">1.4</td><td class="val">1.4</td></tr>
           <tr><td class="lbl">10am – 3pm</td><td class="val">1.3</td><td class="val">1.3</td><td class="val">1.3</td><td class="val">1.3</td></tr>
         </tbody>
       </table>
@@ -189,7 +189,26 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 
   </div>
 
-  <!-- ROW 3: Commonly Used Items -->
+  <!-- ROW 3: Important Field Notes -->
+  <div class="gap">
+    <div class="panel">
+      <div class="ph"><div class="dot" style="background:var(--c-leak)"></div>⚠ Important Field Notes</div>
+      <table class="rt">
+        <thead><tr><th>Topic</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl gold">T350 / T&amp;E Stip</td><td>T350 and Premium Time are <b>always</b> billed at stip factor of 1.0 — do not adjust the multiplier regardless of time window.</td></tr>
+          <tr><td class="lbl warn">Rock Removal</td><td>All rock items (T50, T51, T51H, T52) require a <b>photo with placard</b> before backfill. No placard = no payment.</td></tr>
+          <tr><td class="lbl warn">Pneumatic Tool</td><td>Pneumatic tool <b>inside the trench</b> requires CCI approval before proceeding.</td></tr>
+          <tr><td class="lbl">Steel Main Welds</td><td>G26AS, G27AS, etc. do <b>not</b> include welds in the LF price. Bill each weld separately under GT90A–GT90F.</td></tr>
+          <tr><td class="lbl">GT92 Dual Category</td><td>GT92 (Coal Tar Removal) appears in <b>both</b> Gas Main and Gas Service — verify the section before billing.</td></tr>
+          <tr><td class="lbl">Rock / Sheeting / Plates</td><td>T50, T51, T51H, T52, T101, T101A, T102, T105, T110, T112A appear in Excavation, Gas Main, <b>and</b> Gas Service.</td></tr>
+          <tr><td class="lbl">Service Suffix Key</td><td>Suffix: <b>1</b>=Manhattan (≤30') · <b>2</b>=Queens/Bronx (≤50') · <b>3</b>=Westchester (≤65') &nbsp;|&nbsp; <b>S</b>=steel &nbsp;|&nbsp; <b>I</b>=≤ territory length · <b>II</b>=&gt; territory length</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROW 4: Commonly Used Items -->
   <div class="gap">
     <div class="panel">
       <div class="ph"><div class="dot" style="background:var(--c-common)"></div>Commonly Used Items</div>
@@ -197,8 +216,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
         <thead><tr><th>Code</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td class="code">T43</td><td>Excavation and Backfill</td></tr>
-          <tr><td class="code">T2R</td><td>Roadway Top and Base (1 ft)</td></tr>
-          <tr><td class="code">T7</td><td>Sidewalk Excavation (× 0.33 ft)</td></tr>
+                    <tr><td class="code">T7</td><td>Sidewalk Excavation (× 0.33 ft)</td></tr>
           <tr><td class="code">T7A</td><td>Sidewalk Restoration (× 0.33 ft)</td></tr>
           <tr><td class="code">T7R</td><td>Sidewalk Excavation &amp; Restoration (× 0.33 ft)</td></tr>
           <tr><td class="code">T101</td><td>Vertical Sheeting</td></tr>
@@ -214,7 +232,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
           <tr><td class="code">GT42A–C</td><td>Main Offset</td></tr>
           <tr><td class="code">GT31A–D</td><td>Service Transfer</td></tr>
           <tr><td class="code">G1–5</td><td>Service Items</td></tr>
-          <tr><td class="code">GT200</td><td>All Inclusive Service Items under 50'</td></tr>
+          <tr><td class="code">GT-200A–BS</td><td>All-Inclusive Lump-Sum Service (≤ territory length)</td></tr>
           <tr><td class="code">G1AI / G1BI / G1CI / G1DI</td><td>Service Item (Linear Foot)</td></tr>
           <tr><td class="code">G5AI / G5BI / G5CI</td><td>Pipe Installation on Open Excavation</td></tr>
           <tr><td class="code">G3AI / G3BI / G3CI</td><td>Service Inserts</td></tr>
