@@ -100,6 +100,24 @@ machine — see the FieldLog repo's `.claude/` for a no-dependency static server
   `C:\Users\jflav\iCloudDrive\!Work Hub iOS\GitHub\Field hub\workFr0g 2\` — it
   diverged from the live repo and is retired.
 
+## How we work together (sessions & memory)
+
+This brief is written here on purpose: **`CLAUDE.md` is committed to the repo, so
+it syncs across every device through GitHub** — including the user's iPhone, which
+is the primary device. It is the one piece of context guaranteed to load in any
+session working in this repo, on any device.
+
+- **`memory/` does NOT sync across devices** and is scoped per-repo. It lives in
+  the local `.claude` folder of whichever machine wrote it (desktop), under a
+  path keyed to *this* repo. iOS sessions can't see it. So anything durable the
+  iPhone needs belongs **here in `CLAUDE.md`**, not in a memory note.
+- **Organize chats by workstream, not by device.** Field Hub work goes in its own
+  chat (ideally on the iPhone, the primary device), rooted in the `workFr0g`
+  repo so this brief loads. Field Log work lives in a separate chat against the
+  FieldLog repo. Cross-repo / setup work goes in a general desktop chat.
+- A fresh chat loses nothing important as long as durable facts live in this file
+  (and the code). Don't rely on reading old conversations — write it down here.
+
 ## Related projects
 
 - **[Field Log](https://github.com/darkFr0g/FieldLog)** — sibling PWA (route
