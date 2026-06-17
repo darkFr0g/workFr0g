@@ -36,9 +36,11 @@ ships inline in the app — nothing is sent to a server.
 - **Vanilla JS**, no modules/TypeScript. Idiom is mixed `var`/`function` with
   some `const`/`let`/arrow functions — match whatever the file you're editing
   already uses.
-- **Relative paths within a tool**, but note the service worker precache list in
-  `sw.js` uses **absolute `/workFr0g/...` paths** (the Pages subpath) — keep
-  those exact. `manifest.json` `start_url`/`scope` are also `/workFr0g/`.
+- **Relative paths everywhere** (`./...`), including the service worker precache
+  list in `sw.js` — these resolve correctly under the `/workFr0g/` Pages subpath
+  without hard-coding it (matches the Field Log sibling). Do **not** switch
+  `sw.js` back to absolute `/workFr0g/...` paths. `manifest.json`
+  `start_url`/`scope` remain `/workFr0g/`.
 - Structure:
   - `index.html` — hub home screen (tool tiles)
   - `xcmg-reference/index.html` — XCMG Item Search (the big one)
@@ -60,10 +62,10 @@ ships inline in the app — nothing is sent to a server.
 
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
-  tool's `index.html` by absolute `/workFr0g/...` path.
-- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.2.0`**)
+  tool's `index.html` by **relative `./...` path**.
+- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.2.1`**)
   so devices re-fetch. **Also update the footer version** in the hub
-  `index.html` (`.footer-version`, currently `v1.2.0`) to match — keep the two
+  `index.html` (`.footer-version`, currently `v1.2.1`) to match — keep the two
   in sync.
 - iOS home-screen icons do NOT auto-update — the user must delete and re-add the
   home-screen shortcut to get a new icon.
