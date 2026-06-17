@@ -49,6 +49,25 @@ ships inline in the app — nothing is sent to a server.
   - `manifest.json`, `sw.js` — PWA
   - `icons/` — `icon-192.png`, `icon-512.png`
 
+## Design / visual style (matte — matches Field Log)
+
+As of v1.3.0 the app uses the **Field Log "matte" look**, not the old dark
+navy/glow theme. Keep all pages on this system:
+- **Palette:** matte grey bg `#EBEBEB`, white card surfaces `#fff`, grey borders
+  `#D0D0D0`, near-black ink `#111` / `#1A1917` for the top bar + primary buttons.
+  Tiny uppercase labels (weight 800, wide letter-spacing). Flat — no glows, no
+  grid texture, light shadows only.
+- **Accents (card stripes):** blue `#2563EB`, green `#059669`, purple `#7C3AED`,
+  amber `#D97706`. Status tints: green/amber/blue `*-bg`/`*-text` pairs.
+- **Fonts:** `DM Sans` (body) + `DM Mono` (mono), loaded from Google Fonts with a
+  system-font fallback so it still looks right offline.
+- Each tool page carries its **own inline `<style>`** (no shared CSS file — the
+  no-build rule stands), so the matte tokens are duplicated per page. When
+  editing one tool, match these exact values.
+- **Rollout status:** hub `index.html` ✅ done. Tool pages (`xcmg-reference`,
+  `quick-reference`, `gas-symbols`, `charging-guide`) — _still on the old dark
+  theme; reskin pending._
+
 ## Deploy
 
 - **Push to `main` → auto-publishes** to GitHub Pages (Pages source is the
@@ -63,9 +82,9 @@ ships inline in the app — nothing is sent to a server.
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.2.1`**)
+- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.3.0`**)
   so devices re-fetch. **Also update the footer version** in the hub
-  `index.html` (`.footer-version`, currently `v1.2.1`) to match — keep the two
+  `index.html` (`.footer-version`, currently `v1.3.0`) to match — keep the two
   in sync.
 - iOS home-screen icons do NOT auto-update — the user must delete and re-add the
   home-screen shortcut to get a new icon.
