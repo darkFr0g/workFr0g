@@ -3,22 +3,25 @@
 // Update the CACHE_VERSION when deploying new releases
 // ──────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION  = 'v1.2.0';
+const CACHE_VERSION  = 'v1.2.1';
 const STATIC_CACHE   = `field-hub-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE  = `field-hub-dynamic-${CACHE_VERSION}`;
 
-// Files to pre-cache on install (app shell)
+// Files to pre-cache on install (app shell).
+// Paths are RELATIVE to this file's location (…/workFr0g/), matching the
+// Field Log sibling. They resolve correctly under the GitHub Pages subpath
+// without hard-coding /workFr0g/, so renaming the Pages path won't break them.
 const PRECACHE_URLS = [
-  '/workFr0g/',
-  '/workFr0g/index.html',
-  '/workFr0g/manifest.json',
-  '/workFr0g/xcmg-reference/index.html',
-  '/workFr0g/quick-reference/index.html',
-  '/workFr0g/gas-symbols/index.html',
-  '/workFr0g/charging-guide/index.html',
-  '/workFr0g/icons/icon-180.png',
-  '/workFr0g/icons/icon-192.png',
-  '/workFr0g/icons/icon-512.png',
+  './',
+  './index.html',
+  './manifest.json',
+  './xcmg-reference/index.html',
+  './quick-reference/index.html',
+  './gas-symbols/index.html',
+  './charging-guide/index.html',
+  './icons/icon-180.png',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
 ];
 
 // Max entries in the dynamic runtime cache
@@ -106,7 +109,7 @@ async function cacheFirst(request) {
 function offlineFallback(request) {
   // Return the cached hub root as a fallback for unknown HTML pages
   if (request.headers.get('accept')?.includes('text/html')) {
-    return caches.match('/workFr0g/index.html');
+    return caches.match('./index.html');
   }
   return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
 }
