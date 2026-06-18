@@ -64,9 +64,9 @@ navy/glow theme. Keep all pages on this system:
 - Each tool page carries its **own inline `<style>`** (no shared CSS file — the
   no-build rule stands), so the matte tokens are duplicated per page. When
   editing one tool, match these exact values.
-- **Rollout status:** hub `index.html` ✅ done. Tool pages (`xcmg-reference`,
-  `quick-reference`, `gas-symbols`, `charging-guide`) — _still on the old dark
-  theme; reskin pending._
+- **Rollout status:** ✅ matte across the whole app — hub `index.html` and all
+  four tool pages (`xcmg-reference`, `quick-reference`, `gas-symbols`,
+  `charging-guide`) reskinned as of v1.3.0.
 
 ## Deploy
 

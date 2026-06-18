@@ -2,43 +2,49 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a1917">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <title>Quick Reference Guide — XCMG Gas</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root {
-  --bg:#0f1117;--surface:#181b23;--panel:#1e2130;--border:#2a2e3d;
-  --border2:#363b50;--text:#e8eaf0;--muted:#7b82a0;--dim:#4a5068;
-  --coned:#4ab3e8;
-  --c-main:#6c8fff;--c-leak:#ff5f5f;--c-excavation:#f0a030;
-  --c-restoration:#48c98e;--c-electric:#b07aff;--c-misc:#7b8ab0;--c-common:#ffd04b;
-  --radius:6px;--font:-apple-system,"Segoe UI",system-ui,sans-serif;
-  --mono:"SF Mono","Cascadia Code","Consolas",monospace;
+  --bg:#EBEBEB;--surface:#FFFFFF;--panel:#F2F2F2;--border:#D0D0D0;
+  --border2:#AAAAAA;--text:#111111;--muted:#555555;--dim:#888888;
+  --coned:#2563EB;--dark:#1A1917;
+  --c-main:#2563EB;--c-leak:#C0392B;--c-excavation:#D97706;
+  --c-restoration:#059669;--c-electric:#7C3AED;--c-misc:#64748B;--c-common:#B45309;
+  --radius:6px;--font:'DM Sans',-apple-system,"Segoe UI",system-ui,sans-serif;
+  --mono:'DM Mono',"SF Mono","Cascadia Code","Consolas",monospace;
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;}
-.sitenav{background:#07090f;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;padding:0 16px;height:38px;overflow-x:auto;}
-.sitenav a{color:var(--muted);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:0 10px;height:38px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.15s;}
-.sitenav a:hover{color:var(--text);}
-.sitenav a.active{color:var(--coned);border-bottom-color:var(--coned);}
-.sitenav a.hub-link{color:var(--text);font-weight:800;}
-.sitenav a.hub-link.active{color:var(--coned);}
-.nav-divider{width:1px;height:18px;background:var(--border2);flex-shrink:0;margin:0 4px;}
-.header{background:#0a0c12;border-bottom:2px solid var(--border);padding:0 16px;display:flex;align-items:center;gap:12px;height:52px;}
-.logo{background:var(--coned);color:#000;font-weight:800;font-size:13px;letter-spacing:2px;padding:5px 10px;border-radius:3px;flex-shrink:0;}
-.header-title{font-size:15px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);opacity:.9;}
+.sitenav{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:4px;padding:0 16px;height:42px;overflow-x:auto;}
+.sitenav a{color:rgba(255,255,255,.55);text-decoration:none;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:0 10px;height:42px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.15s;}
+.sitenav a:hover{color:#fff;}
+.sitenav a.active{color:#fff;border-bottom-color:#fff;}
+.sitenav a.hub-link{color:#fff;font-weight:800;}
+.sitenav a.hub-link.active{color:#fff;}
+.nav-divider{width:1px;height:16px;background:rgba(255,255,255,.18);flex-shrink:0;margin:0 4px;}
+.header{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);padding:0 16px;display:flex;align-items:center;gap:12px;height:52px;}
+.logo{background:var(--coned);color:#fff;font-weight:800;font-size:13px;letter-spacing:2px;padding:5px 10px;border-radius:3px;flex-shrink:0;}
+.header-title{font-size:15px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;opacity:.95;}
 .main{padding:16px;max-width:1400px;margin:0 auto;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
 .gap{margin-top:14px;}
-.panel{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.ph{background:var(--panel);padding:9px 14px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.panel{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.ph{background:var(--panel);padding:9px 14px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
 .ph .dot{width:3px;height:14px;border-radius:2px;flex-shrink:0;}
 .rt{width:100%;border-collapse:collapse;}
-.rt th{background:rgba(255,255,255,0.03);color:var(--dim);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:7px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.rt th{background:rgba(0,0,0,0.03);color:var(--dim);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:7px 12px;text-align:left;border-bottom:1px solid var(--border);}
 .rt td{padding:8px 12px;font-size:13px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:middle;}
 .rt tr:last-child td{border-bottom:none;}
-.rt tr:hover td{background:rgba(255,255,255,0.02);}
+.rt tr:hover td{background:rgba(0,0,0,0.02);}
 .rt td.lbl{color:var(--text);font-weight:600;white-space:nowrap;}
-.rt td.val{color:#fff;font-weight:700;font-family:var(--mono);}
+.rt td.val{color:var(--text);font-weight:700;font-family:var(--mono);}
 .rt td.code{font-family:var(--mono);font-size:12.5px;color:var(--text);font-weight:700;white-space:nowrap;}
 .warn{color:var(--c-leak)!important;font-weight:700!important;}
 .gold{color:var(--c-common)!important;font-weight:700!important;}
