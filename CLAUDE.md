@@ -49,24 +49,28 @@ ships inline in the app — nothing is sent to a server.
   - `manifest.json`, `sw.js` — PWA
   - `icons/` — `icon-192.png`, `icon-512.png`
 
-## Design / visual style (matte — matches Field Log)
+## Design / visual style (matte monochrome — matches Field Log)
 
-As of v1.3.0 the app uses the **Field Log "matte" look**, not the old dark
-navy/glow theme. Keep all pages on this system:
+As of v1.4.0 the app uses a **matte, near-monochrome** take on the Field Log
+look. Keep all pages on this system:
 - **Palette:** matte grey bg `#EBEBEB`, white card surfaces `#fff`, grey borders
-  `#D0D0D0`, near-black ink `#111` / `#1A1917` for the top bar + primary buttons.
+  `#D0D0D0`, near-black ink `#111` / `#1A1917` for the top bar + nav + accents.
   Tiny uppercase labels (weight 800, wide letter-spacing). Flat — no glows, no
   grid texture, light shadows only.
-- **Accents (card stripes):** blue `#2563EB`, green `#059669`, purple `#7C3AED`,
-  amber `#D97706`. Status tints: green/amber/blue `*-bg`/`*-text` pairs.
-- **Fonts:** `DM Sans` (body) + `DM Mono` (mono), loaded from Google Fonts with a
-  system-font fallback so it still looks right offline.
+- **Monochrome by default.** Card accent stripes + most chrome are near-black
+  `#1A1917` / greys. **One pop of colour: lime green `#65A30D`, reserved for Gas
+  Symbols** (its hub card stripe + icon, its nav active state, logo badge, and
+  section headers). Don't reintroduce the old blue/purple/amber rainbow on the
+  hub. (XCMG's internal category colours stay for functional code colour-coding.)
+- **Nav:** shared dark icon bar across all 5 pages (Hub + 4 tools) — line-art SVG
+  icons (`stroke:currentColor`) stacked over tiny uppercase labels, Field Log
+  style. Active tab = white (lime on the Gas Symbols page). Labels: Hub, Items,
+  Quick, Symbols, Charging. **No emoji.** Markup is duplicated per page.
+- **Fonts:** `DM Sans` (body) + `DM Mono` (mono), Google Fonts + system fallback.
 - Each tool page carries its **own inline `<style>`** (no shared CSS file — the
-  no-build rule stands), so the matte tokens are duplicated per page. When
-  editing one tool, match these exact values.
-- **Rollout status:** ✅ matte across the whole app — hub `index.html` and all
-  four tool pages (`xcmg-reference`, `quick-reference`, `gas-symbols`,
-  `charging-guide`) reskinned as of v1.3.0.
+  no-build rule stands), so tokens + nav markup are duplicated per page; a
+  nav/icon change means editing all five files.
+- **Rollout status:** ✅ matte monochrome across the whole app as of v1.4.0.
 
 ## Deploy
 
@@ -82,9 +86,9 @@ navy/glow theme. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.3.0`**)
+- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.4.0`**)
   so devices re-fetch. **Also update the footer version** in the hub
-  `index.html` (`.footer-version`, currently `v1.3.0`) to match — keep the two
+  `index.html` (`.footer-version`, currently `v1.4.0`) to match — keep the two
   in sync.
 - iOS home-screen icons do NOT auto-update — the user must delete and re-add the
   home-screen shortcut to get a new icon.
