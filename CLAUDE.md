@@ -17,17 +17,21 @@ This is the **sibling** of **Field Log** (https://github.com/darkFr0g/FieldLog),
 which handles route sheets + Daily Log Reports. Field Hub is the *reference*
 half. It supersedes the retired **GasReferenceTool** repo.
 
-### Four tools inside the app (each its own folder)
+### Five tools inside the app (each its own folder)
 - **XCMG Item Search** (`xcmg-reference/`) — searchable list of XCMG construction
   items/codes (code, description, unit, type, categories), with a "commonly
   used" starred set.
+- **Charging Guide** (`charging-guide/`) — POET / charging codes reference.
 - **Quick Reference** (`quick-reference/`) — at-a-glance field lookups (stip
   schedule, pressure testing, conversions, UG clearances).
 - **Gas Symbols** (`gas-symbols/`) — gas-utility map symbols and meanings.
-- **Charging Guide** (`charging-guide/`) — POET / charging codes reference.
+- **Glossary** (`glossary/`) — gas terms, acronyms, pressure classes & suffix
+  keys; client-side search. Seeded as a starter set, **meant to grow** (more
+  sections/terms to come).
 
-The hub `index.html` is just the tile launcher for the four tools. All data
-ships inline in the app — nothing is sent to a server.
+Hub-tile + nav order is **Items → Charging → Quick → Symbols → Glossary**
+(Charging follows Items, by request). The hub `index.html` is the tile launcher.
+All data ships inline in the app — nothing is sent to a server.
 
 ## Architecture / conventions
 
@@ -44,33 +48,38 @@ ships inline in the app — nothing is sent to a server.
 - Structure:
   - `index.html` — hub home screen (tool tiles)
   - `xcmg-reference/index.html` — XCMG Item Search (the big one)
-  - `quick-reference/index.html`, `gas-symbols/index.html`,
-    `charging-guide/index.html` — the other three tools
+  - `charging-guide/index.html`, `quick-reference/index.html`,
+    `gas-symbols/index.html`, `glossary/index.html` — the other four tools
   - `manifest.json`, `sw.js` — PWA
   - `icons/` — `icon-192.png`, `icon-512.png`
 
 ## Design / visual style (matte monochrome — matches Field Log)
 
-As of v1.4.0 the app uses a **matte, near-monochrome** take on the Field Log
+As of v1.5.0 the app uses a **matte, near-monochrome** take on the Field Log
 look. Keep all pages on this system:
 - **Palette:** matte grey bg `#EBEBEB`, white card surfaces `#fff`, grey borders
-  `#D0D0D0`, near-black ink `#111` / `#1A1917` for the top bar + nav + accents.
-  Tiny uppercase labels (weight 800, wide letter-spacing). Flat — no glows, no
-  grid texture, light shadows only.
-- **Monochrome by default.** Card accent stripes + most chrome are near-black
-  `#1A1917` / greys. **One pop of colour: lime green `#65A30D`, reserved for Gas
-  Symbols** (its hub card stripe + icon, its nav active state, logo badge, and
-  section headers). Don't reintroduce the old blue/purple/amber rainbow on the
-  hub. (XCMG's internal category colours stay for functional code colour-coding.)
-- **Nav:** shared dark icon bar across all 5 pages (Hub + 4 tools) — line-art SVG
+  `#D0D0D0`, near-black ink `#111` / `#1A1917` for the top bar + nav. Tiny
+  uppercase labels (weight 800, wide letter-spacing). Flat — no glows, no grid
+  texture, light shadows only.
+- **Mostly monochrome, one minimalist accent colour per section.** Each tool owns
+  one colour — used for its hub-card stripe + icon and its active nav tab (and on
+  a tool page, its logo badge + section headers): **Items `#2563EB` blue,
+  Charging `#D97706` amber, Quick `#0891B2` teal, Gas Symbols `#65A30D` lime,
+  Glossary `#7C3AED` violet.** Don't bring back a multi-colour rainbow on the hub
+  *chrome*. (XCMG's internal category colours stay for functional code
+  colour-coding.)
+- **Nav:** shared dark icon bar across all 6 pages (Hub + 5 tools) — line-art SVG
   icons (`stroke:currentColor`) stacked over tiny uppercase labels, Field Log
-  style. Active tab = white (lime on the Gas Symbols page). Labels: Hub, Items,
-  Quick, Symbols, Charging. **No emoji.** Markup is duplicated per page.
+  style. Active tab = that page's accent colour (white on the Hub). Labels: Hub,
+  Items, Charging, Quick, Symbols, Glossary. **No emoji.** Markup is duplicated
+  per page.
 - **Fonts:** `DM Sans` (body) + `DM Mono` (mono), Google Fonts + system fallback.
 - Each tool page carries its **own inline `<style>`** (no shared CSS file — the
   no-build rule stands), so tokens + nav markup are duplicated per page; a
-  nav/icon change means editing all five files.
-- **Rollout status:** ✅ matte monochrome across the whole app as of v1.4.0.
+  nav/icon change means editing all **six** files (hub + 5 tools).
+- **Value-column text uses the sans `--font`, not `--mono`** — DM Mono mangles
+  fraction glyphs (¼, ½). Keep code/acronym cells mono, but plain values sans.
+- **Rollout status:** ✅ matte monochrome across the whole app as of v1.5.0.
 
 ## Deploy
 

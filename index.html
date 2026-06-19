@@ -197,7 +197,7 @@
       height: 26px;
       display: block;
       margin-bottom: 12px;
-      stroke: var(--ink);
+      stroke: var(--card-accent, var(--ink));
       fill: none;
       stroke-width: 2;
       stroke-linecap: round;
@@ -312,14 +312,17 @@
   <a href="xcmg-reference/index.html" aria-label="Items">
     <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span>Items</span>
   </a>
+  <a href="charging-guide/index.html" aria-label="Charging Guide">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M16.5 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"/></svg><span>Charging</span>
+  </a>
   <a href="quick-reference/index.html" aria-label="Quick Reference">
     <svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg><span>Quick</span>
   </a>
   <a href="gas-symbols/index.html" aria-label="Gas Symbols">
-    <svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="3.2"/><rect x="13.5" y="4.8" width="6.5" height="6.5" rx="1"/><path d="M8 13.5 12 20.5 4 20.5 Z"/></svg><span>Symbols</span>
+    <svg viewBox="0 0 24 24"><path d="M3 6.5 9 4.5 15 6.5 21 4.5V17.5L15 19.5 9 17.5 3 19.5Z"/><path d="M6.5 14.5 10 9 14 13 17.5 8.5"/><circle cx="10" cy="9" r="1.1"/><circle cx="14" cy="13" r="1.1"/></svg><span>Symbols</span>
   </a>
-  <a href="charging-guide/index.html" aria-label="Charging Guide">
-    <svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M16.5 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"/></svg><span>Charging</span>
+  <a href="glossary/index.html" aria-label="Glossary">
+    <svg viewBox="0 0 24 24"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4H18v13H6.5A1.5 1.5 0 0 0 5 18.5v-13z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 20H18"/><line x1="9" y1="8" x2="14" y2="8"/></svg><span>Glossary</span>
   </a>
 </nav>
 
@@ -332,28 +335,34 @@
   <div class="section-label">Tools</div>
   <div class="tool-grid">
 
-    <a class="tool-card" href="xcmg-reference/index.html">
+    <a class="tool-card" href="xcmg-reference/index.html" style="--card-accent:#2563EB;">
       <svg class="card-icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
       <div class="card-title">XCMG Items</div>
       <div class="card-desc">Item search, tag filters, list/grid/group views</div>
     </a>
 
-    <a class="tool-card" href="quick-reference/index.html">
+    <a class="tool-card" href="charging-guide/index.html" style="--card-accent:#D97706;">
+      <svg class="card-icon" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M16.5 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"/></svg>
+      <div class="card-title">Charging Guide</div>
+      <div class="card-desc">POET codes: Capital, O&amp;M, Retirement classifications</div>
+    </a>
+
+    <a class="tool-card" href="quick-reference/index.html" style="--card-accent:#0891B2;">
       <svg class="card-icon" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
       <div class="card-title">Quick Reference</div>
       <div class="card-desc">Stip schedule, pressure testing, conversions, UG clearances</div>
     </a>
 
-    <a class="tool-card" href="gas-symbols/index.html" style="--card-accent: var(--lime);">
-      <svg class="card-icon" viewBox="0 0 24 24" style="stroke: var(--lime);"><circle cx="7" cy="8" r="3.2"/><rect x="13.5" y="4.8" width="6.5" height="6.5" rx="1"/><path d="M8 13.5 12 20.5 4 20.5 Z"/></svg>
+    <a class="tool-card" href="gas-symbols/index.html" style="--card-accent:#65A30D;">
+      <svg class="card-icon" viewBox="0 0 24 24"><path d="M3 6.5 9 4.5 15 6.5 21 4.5V17.5L15 19.5 9 17.5 3 19.5Z"/><path d="M6.5 14.5 10 9 14 13 17.5 8.5"/><circle cx="10" cy="9" r="1.1"/><circle cx="14" cy="13" r="1.1"/></svg>
       <div class="card-title">Gas Symbols</div>
       <div class="card-desc">Drawing symbols reference for field documentation</div>
     </a>
 
-    <a class="tool-card" href="charging-guide/index.html">
-      <svg class="card-icon" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M16.5 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"/></svg>
-      <div class="card-title">Charging Guide</div>
-      <div class="card-desc">POET codes: Capital, O&amp;M, Retirement classifications</div>
+    <a class="tool-card" href="glossary/index.html" style="--card-accent:#7C3AED;">
+      <svg class="card-icon" viewBox="0 0 24 24"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4H18v13H6.5A1.5 1.5 0 0 0 5 18.5v-13z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 20H18"/><line x1="9" y1="8" x2="14" y2="8"/></svg>
+      <div class="card-title">Glossary</div>
+      <div class="card-desc">Gas terms, acronyms, pressure classes &amp; suffix keys</div>
     </a>
 
   </div>
@@ -362,7 +371,7 @@
 
 <!-- ── Footer ──────────────────────────────────────────────── -->
 <footer>
-  <span class="footer-version">v1.4.0</span>
+  <span class="footer-version">v1.5.0</span>
 </footer>
 
 <!-- ── Install banner (Android / Chrome) ───────────────────── -->

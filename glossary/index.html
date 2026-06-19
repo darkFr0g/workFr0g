@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a1917">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Glossary — XCMG</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#EBEBEB;--surface:#FFFFFF;--panel:#F2F2F2;--border:#D0D0D0;--border2:#AAAAAA;
+  --text:#111111;--muted:#555555;--dim:#888888;
+  --dark:#1A1917;--accent:#7C3AED;
+  --radius:6px;
+  --font:'DM Sans',-apple-system,"Segoe UI",system-ui,sans-serif;
+  --mono:'DM Mono',"SF Mono","Cascadia Code","Consolas",monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+.sitenav{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:stretch;height:58px;position:sticky;top:0;z-index:100;}
+.sitenav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:rgba(255,255,255,.45);font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;transition:color 0.15s;}
+.sitenav a svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.sitenav a.active{color:var(--accent);}
+
+/* HEADER */
+.header{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);padding:0 16px;display:flex;align-items:center;gap:12px;height:52px;}
+.logo{background:var(--accent);color:#fff;font-weight:800;font-size:13px;letter-spacing:2px;padding:5px 10px;border-radius:3px;flex-shrink:0;}
+.header-title{font-size:15px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;opacity:.95;}
+
+/* LAYOUT */
+.main{padding:16px;max-width:900px;margin:0 auto;}
+.section{margin-top:20px;}
+.section:first-of-type{margin-top:0;}
+.section-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent);padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:4px;}
+#gsearch{width:100%;background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font);font-size:16px;font-weight:600;padding:11px 14px;outline:none;}
+#gsearch:focus{border-color:var(--accent);}
+#gsearch::placeholder{color:var(--dim);font-weight:500;}
+
+/* TABLE */
+.panel{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.rt{width:100%;border-collapse:collapse;}
+.rt td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--border);vertical-align:top;}
+.rt tr:last-child td{border-bottom:none;}
+.rt tr:hover td{background:rgba(0,0,0,0.02);}
+.rt td.term{font-family:var(--mono);font-weight:700;color:var(--text);white-space:nowrap;width:1%;padding-right:18px;}
+.rt td.def{color:var(--muted);}
+.rt td.def b{color:var(--text);font-weight:700;}
+.no-hit{padding:24px 14px;text-align:center;color:var(--dim);font-size:13px;font-weight:600;display:none;}
+
+.note{font-size:11px;color:var(--dim);line-height:1.6;margin-top:14px;text-align:center;}
+@media(max-width:600px){.main{padding:10px;}.rt th,.rt td{padding:9px 10px;}}
+@media(min-width:900px){.main{padding:16px 24px;}}
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <a href="../index.html" aria-label="Hub"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/></svg><span>Hub</span></a>
+  <a href="../xcmg-reference/index.html" aria-label="Items"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span>Items</span></a>
+  <a href="../charging-guide/index.html" aria-label="Charging Guide"><svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M16.5 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"/></svg><span>Charging</span></a>
+  <a href="../quick-reference/index.html" aria-label="Quick Reference"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg><span>Quick</span></a>
+  <a href="../gas-symbols/index.html" aria-label="Gas Symbols"><svg viewBox="0 0 24 24"><path d="M3 6.5 9 4.5 15 6.5 21 4.5V17.5L15 19.5 9 17.5 3 19.5Z"/><path d="M6.5 14.5 10 9 14 13 17.5 8.5"/><circle cx="10" cy="9" r="1.1"/><circle cx="14" cy="13" r="1.1"/></svg><span>Symbols</span></a>
+  <a href="index.html" class="active" aria-label="Glossary"><svg viewBox="0 0 24 24"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4H18v13H6.5A1.5 1.5 0 0 0 5 18.5v-13z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 20H18"/><line x1="9" y1="8" x2="14" y2="8"/></svg><span>Glossary</span></a>
+</nav>
+
+<header class="header">
+  <div class="logo">XCMG</div>
+  <div class="header-title">Glossary &amp; Terms</div>
+</header>
+
+<div class="main">
+
+  <div class="search-wrap">
+    <input type="text" id="gsearch" placeholder="Search terms, acronyms, definitions…" autocomplete="off" autocorrect="off" spellcheck="false">
+  </div>
+
+  <!-- PRESSURE CLASSES -->
+  <div class="section">
+    <div class="section-label">Pressure Classes</div>
+    <div class="panel"><table class="rt"><tbody>
+      <tr><td class="term">LP</td><td class="def"><b>Low Pressure</b> — 4″ to 12″ WC.</td></tr>
+      <tr><td class="term">IP</td><td class="def"><b>Intermediate Pressure</b> — 1 to 5 PSIG.</td></tr>
+      <tr><td class="term">MP</td><td class="def"><b>Medium Pressure</b> — 2 to 15 PSIG.</td></tr>
+      <tr><td class="term">HP</td><td class="def"><b>High Pressure</b> — 15 to 99 PSIG.</td></tr>
+      <tr><td class="term">XHP</td><td class="def"><b>Extra High Pressure</b> — 125 to 350 PSIG.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- PIPE MATERIALS -->
+  <div class="section">
+    <div class="section-label">Pipe Materials</div>
+    <div class="panel"><table class="rt"><tbody>
+      <tr><td class="term">PE</td><td class="def"><b>Polyethylene</b> — plastic gas pipe; the standard for new mains &amp; services.</td></tr>
+      <tr><td class="term">ST</td><td class="def"><b>Steel</b> — used for higher-pressure mains, services &amp; risers.</td></tr>
+      <tr><td class="term">CI / WI</td><td class="def"><b>Cast Iron / Wrought Iron</b> — legacy main material targeted for replacement.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- CHARGING CLASSIFICATIONS -->
+  <div class="section">
+    <div class="section-label">Charging Classifications</div>
+    <div class="panel"><table class="rt"><tbody>
+      <tr><td class="term">Capital</td><td class="def">New plant or betterment charged to a capital project (Main Account).</td></tr>
+      <tr><td class="term">O&amp;M</td><td class="def"><b>Operations &amp; Maintenance</b> — expense work (repair / replace in kind).</td></tr>
+      <tr><td class="term">Retirement</td><td class="def">Removal or abandonment of existing facilities (CI/WI, ST, or PE).</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- SERVICE & RESTORATION SUFFIXES -->
+  <div class="section">
+    <div class="section-label">Service &amp; Restoration Suffixes</div>
+    <div class="panel"><table class="rt"><tbody>
+      <tr><td class="term">1 / 2 / 3</td><td class="def">Service territory length: <b>1</b> = Manhattan (≤30′) · <b>2</b> = Queens / Bronx (≤50′) · <b>3</b> = Westchester (≤65′).</td></tr>
+      <tr><td class="term">S</td><td class="def">Steel service (vs. the default plastic).</td></tr>
+      <tr><td class="term">I / II</td><td class="def"><b>I</b> = within (≤) territory length · <b>II</b> = beyond (&gt;) territory length.</td></tr>
+      <tr><td class="term">A / R / I</td><td class="def">Restoration (Micro): <b>A</b> = installation only · <b>R</b> = removal + installation · <b>I</b> = incremental (stacks with other suffixes).</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- COMMON ACRONYMS -->
+  <div class="section">
+    <div class="section-label">Common Acronyms</div>
+    <div class="panel"><table class="rt"><tbody>
+      <tr><td class="term">MAOP</td><td class="def"><b>Maximum Allowable Operating Pressure</b> — the highest pressure a segment may be operated at.</td></tr>
+      <tr><td class="term">WC</td><td class="def"><b>Water Column</b> (inches) — the unit used to measure low-pressure gas.</td></tr>
+      <tr><td class="term">WO / WR</td><td class="def"><b>Work Order / Work Request</b> — the job number a ticket is charged to.</td></tr>
+      <tr><td class="term">POET</td><td class="def"><b>Project · Organization · Expenditure · Task</b> — the charging string that routes a cost (see Charging Guide).</td></tr>
+      <tr><td class="term">T&amp;E</td><td class="def"><b>Time &amp; Equipment</b> — billed under T350, always at a stip factor of 1.0.</td></tr>
+      <tr><td class="term">Stip</td><td class="def"><b>Stipulation</b> — the payment factor (multiplier) set by the work-window timing.</td></tr>
+      <tr><td class="term">HVI</td><td class="def"><b>High Value Item</b> — e.g. rock removal; requires a photo with placard before backfill.</td></tr>
+      <tr><td class="term">M&amp;S</td><td class="def"><b>Mains &amp; Services</b>.</td></tr>
+      <tr><td class="term">MRP</td><td class="def"><b>Main Replacement Program</b> — replacing leak-prone (CI/WI, ST) mains with PE.</td></tr>
+      <tr><td class="term">DLR</td><td class="def"><b>Daily Log Report</b> — the per-day crew &amp; equipment record (see the Field Log app).</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <div class="no-hit" id="noHit">No matching terms — try another word.</div>
+
+  <div class="note">Starter set — more terms will be added over time.</div>
+
+</div>
+
+<script>
+// Simple client-side filter across all glossary rows.
+(function(){
+  var input = document.getElementById('gsearch');
+  var rows  = Array.prototype.slice.call(document.querySelectorAll('.rt tr'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+  var noHit = document.getElementById('noHit');
+
+  input.addEventListener('input', function(){
+    var q = input.value.trim().toLowerCase();
+    var anyHit = false;
+
+    rows.forEach(function(tr){
+      var hit = !q || tr.textContent.toLowerCase().indexOf(q) !== -1;
+      tr.style.display = hit ? '' : 'none';
+      if (hit) anyHit = true;
+    });
+
+    // Hide a section if all its rows are filtered out.
+    sections.forEach(function(sec){
+      var visible = sec.querySelectorAll('.rt tr:not([style*="display: none"])').length;
+      sec.style.display = visible ? '' : 'none';
+    });
+
+    noHit.style.display = anyHit ? 'none' : 'block';
+  });
+})();
+</script>
+
+</body>
+</html>
