@@ -3,7 +3,7 @@
 // Update the CACHE_VERSION when deploying new releases
 // ──────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION  = 'v1.4.0';
+const CACHE_VERSION  = 'v1.5.0';
 const STATIC_CACHE   = `field-hub-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE  = `field-hub-dynamic-${CACHE_VERSION}`;
 
@@ -19,6 +19,7 @@ const PRECACHE_URLS = [
   './quick-reference/index.html',
   './gas-symbols/index.html',
   './charging-guide/index.html',
+  './glossary/index.html',
   './icons/icon-180.png',
   './icons/icon-192.png',
   './icons/icon-512.png',

@@ -25,7 +25,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .sitenav{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:stretch;height:58px;position:sticky;top:0;z-index:100;}
 .sitenav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:rgba(255,255,255,.45);font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;transition:color 0.15s;}
 .sitenav a svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.sitenav a.active{color:#fff;}
+.sitenav a.active{color:#0891B2;}
 .header{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);padding:0 16px;display:flex;align-items:center;gap:12px;height:52px;}
 .logo{background:var(--coned);color:#fff;font-weight:800;font-size:13px;letter-spacing:2px;padding:5px 10px;border-radius:3px;flex-shrink:0;}
 .header-title{font-size:15px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;opacity:.95;}
@@ -41,7 +41,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .rt tr:last-child td{border-bottom:none;}
 .rt tr:hover td{background:rgba(0,0,0,0.02);}
 .rt td.lbl{color:var(--text);font-weight:600;white-space:nowrap;}
-.rt td.val{color:var(--text);font-weight:700;font-family:var(--mono);}
+.rt td.val{color:var(--text);font-weight:700;}
 .rt td.code{font-family:var(--mono);font-size:12.5px;color:var(--text);font-weight:700;white-space:nowrap;}
 .warn{color:var(--c-leak)!important;font-weight:700!important;}
 .gold{color:var(--c-common)!important;font-weight:700!important;}
@@ -65,9 +65,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 <nav class="sitenav">
   <a href="../index.html" aria-label="Hub"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/></svg><span>Hub</span></a>
   <a href="../xcmg-reference/index.html" aria-label="Items"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span>Items</span></a>
-  <a href="index.html" class="active" aria-label="Quick Reference"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg><span>Quick</span></a>
-  <a href="../gas-symbols/index.html" aria-label="Gas Symbols"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="3.2"/><rect x="13.5" y="4.8" width="6.5" height="6.5" rx="1"/><path d="M8 13.5 12 20.5 4 20.5 Z"/></svg><span>Symbols</span></a>
   <a href="../charging-guide/index.html" aria-label="Charging Guide"><svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M16.5 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"/></svg><span>Charging</span></a>
+  <a href="index.html" class="active" aria-label="Quick Reference"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg><span>Quick</span></a>
+  <a href="../gas-symbols/index.html" aria-label="Gas Symbols"><svg viewBox="0 0 24 24"><path d="M3 6.5 9 4.5 15 6.5 21 4.5V17.5L15 19.5 9 17.5 3 19.5Z"/><path d="M6.5 14.5 10 9 14 13 17.5 8.5"/><circle cx="10" cy="9" r="1.1"/><circle cx="14" cy="13" r="1.1"/></svg><span>Symbols</span></a>
+  <a href="../glossary/index.html" aria-label="Glossary"><svg viewBox="0 0 24 24"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4H18v13H6.5A1.5 1.5 0 0 0 5 18.5v-13z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 20H18"/><line x1="9" y1="8" x2="14" y2="8"/></svg><span>Glossary</span></a>
 </nav>
 
 <header class="header">
