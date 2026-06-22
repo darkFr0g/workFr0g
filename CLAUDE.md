@@ -191,6 +191,13 @@ Open items as of v1.5.0. Tick/trim as they ship.
     session).
 15. **Trim MCP servers** — drop Notion + tldraw from the workFr0g session (unused
     here; GitHub is the only one needed).
+16. **Optional: shared nav/styles file** — pull the duplicated icon-nav markup +
+    base tokens into one file the pages link to (a small `<script src>`/`<link>`,
+    still no build step), so a nav/icon change is one edit instead of six. Only
+    worth it if the 6-file duplication keeps biting. A full css/js split (Field
+    Log-style) is **not** recommended — the app works and users can't tell; it'd
+    also flip the GitHub language label from HTML to JavaScript, but that's
+    cosmetic.
 
 ## Related projects
 
