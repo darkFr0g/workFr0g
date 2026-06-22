@@ -95,9 +95,9 @@ look. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.4.0`**)
+- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.5.1`**)
   so devices re-fetch. **Also update the footer version** in the hub
-  `index.html` (`.footer-version`, currently `v1.4.0`) to match — keep the two
+  `index.html` (`.footer-version`, currently `v1.5.1`) to match — keep the two
   in sync.
 - iOS home-screen icons do NOT auto-update — the user must delete and re-add the
   home-screen shortcut to get a new icon.
@@ -171,8 +171,10 @@ Open items as of v1.5.0. Tick/trim as they ship.
    blue `XCMG` logo despite amber/teal accents; Symbols & Glossary already match.
 6. **Faint Gas Symbols line-colours** — lighter green/blue symbol strokes may be
    hard to read on the white background; darken for the field.
-7. **Freeze header + nav on every page** — must stay pinned no matter how far
-   scrolled; right now only `xcmg-reference` fully pins its top zone.
+7. ✅ **Freeze header + nav + clear the Dynamic Island** (done v1.5.1) — the nav is
+   sticky and safe-area-padded (`padding-top:env(safe-area-inset-top)`) on every
+   page so it sits below the notch; the hub wraps header+nav in a sticky
+   `.topzone`; XCMG pads its `.sticky-top`.
 8. **Remove the status dot** from the hub header (online/offline indicator + its
    small script).
 

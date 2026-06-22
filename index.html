@@ -61,10 +61,17 @@
     }
 
     /* ── Header (dark top zone) ─────────────────────────────── */
+    .topzone {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding-top: var(--safe-top);
+    }
+
     header {
       background: var(--dark);
       padding: 14px 20px 12px;
-      padding-top: calc(14px + var(--safe-top));
     }
 
     .header-inner {
@@ -104,9 +111,6 @@
 
     /* ── Icon nav (line-art, Field Log style) ───────────────── */
     .sitenav {
-      position: sticky;
-      top: 0;
-      z-index: 99;
       background: var(--dark);
       border-bottom: 1px solid rgba(255,255,255,.08);
       display: flex;
@@ -293,6 +297,7 @@
 </head>
 <body>
 
+<div class="topzone">
 <!-- ── Header ──────────────────────────────────────────────── -->
 <header>
   <div class="header-inner">
@@ -325,6 +330,7 @@
     <svg viewBox="0 0 24 24"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4H18v13H6.5A1.5 1.5 0 0 0 5 18.5v-13z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 20H18"/><line x1="9" y1="8" x2="14" y2="8"/></svg><span>Glossary</span>
   </a>
 </nav>
+</div><!-- /topzone -->
 
 <!-- ── Offline toast ───────────────────────────────────────── -->
 <div id="offline-toast">Offline — cached tools available</div>
@@ -371,7 +377,7 @@
 
 <!-- ── Footer ──────────────────────────────────────────────── -->
 <footer>
-  <span class="footer-version">v1.5.0</span>
+  <span class="footer-version">v1.5.1</span>
 </footer>
 
 <!-- ── Install banner (Android / Chrome) ───────────────────── -->
