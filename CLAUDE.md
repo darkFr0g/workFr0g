@@ -152,6 +152,46 @@ session working in this repo, on any device.
 - A fresh chat loses nothing important as long as durable facts live in this file
   (and the code). Don't rely on reading old conversations — write it down here.
 
+## Backlog / to-do (live list — keep updated)
+
+Open items as of v1.5.0. Tick/trim as they ship.
+
+**Review / decide (user's call):**
+1. **Symbols icon** — confirm the GIS-map-with-route icon, or redraw (two prior
+   icons were rejected: a map emoji and a shapes icon).
+2. **Accent colours** — confirm the five: Items blue `#2563EB`, Charging amber
+   `#D97706`, Quick teal `#0891B2`, Symbols lime `#65A30D`, Glossary violet
+   `#7C3AED`.
+3. **Glossary terms** — verify the seeded set; add more (user to paste a list).
+4. **XCMG tag colours** — keep the category tags colour-coded (functional) or
+   grey them for full monochrome.
+
+**Fix:**
+5. **Page logos/headers → match section accent** — Charging & Quick still show a
+   blue `XCMG` logo despite amber/teal accents; Symbols & Glossary already match.
+6. **Faint Gas Symbols line-colours** — lighter green/blue symbol strokes may be
+   hard to read on the white background; darken for the field.
+7. **Freeze header + nav on every page** — must stay pinned no matter how far
+   scrolled; right now only `xcmg-reference` fully pins its top zone.
+8. **Remove the status dot** from the hub header (online/offline indicator + its
+   small script).
+
+**Build:**
+9. **XCMG source attribution** — credit the *construction trenching manual* on the
+   Items page. **Need the exact manual name from the user.**
+10. **Grow the Glossary** — more terms/sections over time.
+11. **Future sections** — more tools planned (TBD).
+
+**Parked (optional/minor):**
+12. **Auto-deploy GitHub Action** — needs a one-tap Pages-source flip in repo
+    settings; current branch-source deploy works fine without it.
+13. **Offline fonts** — DM Sans/Mono aren't runtime-cached yet (falls back to
+    system fonts offline).
+14. **Confirm Field Log `CLAUDE.md` drift fixed** (was being handled in a FieldLog
+    session).
+15. **Trim MCP servers** — drop Notion + tldraw from the workFr0g session (unused
+    here; GitHub is the only one needed).
+
 ## Related projects
 
 - **[Field Log](https://github.com/darkFr0g/FieldLog)** — sibling PWA (route
