@@ -68,11 +68,13 @@ look. Keep all pages on this system:
   Glossary `#7C3AED` violet.** Don't bring back a multi-colour rainbow on the hub
   *chrome*. (XCMG's internal category colours stay for functional code
   colour-coding.)
-- **Nav:** shared dark icon bar across all 6 pages (Hub + 5 tools) — line-art SVG
+- **Nav:** shared dark icon bar across all 6 pages (Home + 5 tools) — line-art SVG
   icons (`stroke:currentColor`) stacked over tiny uppercase labels, Field Log
-  style. Active tab = that page's accent colour (white on the Hub). Labels: Hub,
-  Items, Charging, Quick, Symbols, Glossary. **No emoji.** Markup is duplicated
-  per page.
+  style. Active tab = that page's accent colour (white on Home). Labels:
+  **Home**, Items, Charging, Quick, Symbols, Glossary. **No emoji.** The nav is
+  the **topmost, sticky, notch-safe** bar on every page — uniform across all six;
+  on Home the "Field Hub" title bar sits *below* the nav (like the tool pages'
+  logo bars). Markup is duplicated per page.
 - **Fonts:** `DM Sans` (body) + `DM Mono` (mono), Google Fonts + system fallback.
 - Each tool page carries its **own inline `<style>`** (no shared CSS file — the
   no-build rule stands), so tokens + nav markup are duplicated per page; a
@@ -95,9 +97,9 @@ look. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.5.5`**)
+- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.5.6`**)
   so devices re-fetch. **Also update the footer version** in the hub
-  `index.html` (`.footer-version`, currently `v1.5.5`) to match — keep the two
+  `index.html` (`.footer-version`, currently `v1.5.6`) to match — keep the two
   in sync.
 - iOS home-screen icons do NOT auto-update — the user must delete and re-add the
   home-screen shortcut to get a new icon.

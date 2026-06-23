@@ -3,7 +3,7 @@
 // Update the CACHE_VERSION when deploying new releases
 // ──────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION  = 'v1.5.5';
+const CACHE_VERSION  = 'v1.5.6';
 const STATIC_CACHE   = `field-hub-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE  = `field-hub-dynamic-${CACHE_VERSION}`;
 
