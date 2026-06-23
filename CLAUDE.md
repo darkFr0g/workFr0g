@@ -182,6 +182,9 @@ Open items as of v1.5.0. Tick/trim as they ship.
 9. **XCMG source attribution** — credit the *construction trenching manual* on the
    Items page. **Need the exact manual name from the user.**
 10. **Grow the Glossary** — more terms/sections over time.
+    - ⏳ **REMINDER: get IP8 / IP9 procedure definitions** — placeholders ("summary
+      to be added") are live in the new **Procedures** section; user to pull the
+      exact wording from the procedure docs (no access at the moment).
 11. **Future sections** — more tools planned (TBD).
 
 **Parked (optional/minor):**
