@@ -1252,14 +1252,22 @@ let activeCat = 'all';
 let activeView = 'grid'; // grid | list | group
 let searchTags = []; // active tag array
 
+function norm(s) { return s.toLowerCase().replace(/[^a-z0-9]/g, ''); }
+
 function matches(item, term) {
   const t = term.toLowerCase();
-  return item.code.toLowerCase().includes(t)
+  if (item.code.toLowerCase().includes(t)
     || item.desc.toLowerCase().includes(t)
     || (item.note && item.note.toLowerCase().includes(t))
     || item.unit.toLowerCase().includes(t)
     || item.type.toLowerCase().includes(t)
-    || item.cats.some(c => c.includes(t));
+    || item.cats.some(c => c.includes(t))) return true;
+  // Punctuation-insensitive fallback: "GT200" matches "GT-200", "G26A" → "G-26A".
+  const tn = norm(term);
+  if (!tn) return false;
+  return norm(item.code).includes(tn)
+    || norm(item.desc).includes(tn)
+    || (item.note ? norm(item.note).includes(tn) : false);
 }
 
 function filterItems() {
