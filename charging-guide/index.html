@@ -28,6 +28,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 
 /* NAV */
 .sitenav{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:stretch;height:calc(58px + env(safe-area-inset-top,0px));position:sticky;top:0;z-index:100;padding-top:env(safe-area-inset-top,0px);}
+@media (display-mode:standalone){.sitenav{padding-top:max(env(safe-area-inset-top,0px),47px);height:calc(58px + max(env(safe-area-inset-top,0px),47px))}}
 .sitenav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:rgba(255,255,255,.45);font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;transition:color 0.15s;}
 .sitenav a svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .sitenav a.active{color:#D97706;}
