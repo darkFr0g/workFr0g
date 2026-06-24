@@ -99,7 +99,7 @@ look. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Version lives in two places, bump both every release** (currently **`v1.6.0`**):
+- **Version lives in two places, bump both every release** (currently **`v1.6.1`**):
   `APP_VERSION` in **`version.js`** (the single source — it injects the version
   into every page's header + footer and powers the in-header reload button) and
   `CACHE_VERSION` in `sw.js` (so devices re-fetch). No more per-page footer

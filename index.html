@@ -48,6 +48,12 @@
       --safe-bot:   env(safe-area-inset-bottom, 0px);
     }
 
+    /* Installed (home-screen) instances sometimes report a 0 top inset even on
+       notched iPhones — guarantee enough room so the nav clears the status bar. */
+    @media (display-mode: standalone) {
+      :root { --safe-top: max(env(safe-area-inset-top, 0px), 47px); }
+    }
+
     html { background: var(--bg); -webkit-text-size-adjust: 100%; }
 
     body {
