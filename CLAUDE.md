@@ -97,9 +97,9 @@ look. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.5.6`**)
+- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.5.7`**)
   so devices re-fetch. **Also update the footer version** in the hub
-  `index.html` (`.footer-version`, currently `v1.5.6`) to match — keep the two
+  `index.html` (`.footer-version`, currently `v1.5.7`) to match — keep the two
   in sync.
 - iOS home-screen icons do NOT auto-update — the user must delete and re-add the
   home-screen shortcut to get a new icon.
