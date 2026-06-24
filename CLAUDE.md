@@ -51,6 +51,8 @@ All data ships inline in the app — nothing is sent to a server.
   - `charging-guide/index.html`, `quick-reference/index.html`,
     `gas-symbols/index.html`, `glossary/index.html` — the other four tools
   - `manifest.json`, `sw.js` — PWA
+  - `version.js` — single-source app version + in-header reload button (loaded by
+    every page; `<script src>` / `../version.js`, no build step)
   - `icons/` — `icon-192.png`, `icon-512.png`
 
 ## Design / visual style (matte monochrome — matches Field Log)
@@ -97,10 +99,11 @@ look. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Bump `CACHE_VERSION`** in `sw.js` on every release (currently **`v1.5.8`**)
-  so devices re-fetch. **Also update the footer version** in the hub
-  `index.html` (`.footer-version`, currently `v1.5.8`) to match — keep the two
-  in sync.
+- **Version lives in two places, bump both every release** (currently **`v1.6.0`**):
+  `APP_VERSION` in **`version.js`** (the single source — it injects the version
+  into every page's header + footer and powers the in-header reload button) and
+  `CACHE_VERSION` in `sw.js` (so devices re-fetch). No more per-page footer
+  edits. `version.js` is precached in `sw.js`.
 - iOS home-screen icons do NOT auto-update — the user must delete and re-add the
   home-screen shortcut to get a new icon.
 
@@ -177,8 +180,8 @@ Open items as of v1.5.0. Tick/trim as they ship.
    sticky and safe-area-padded (`padding-top:env(safe-area-inset-top)`) on every
    page so it sits below the notch; the hub wraps header+nav in a sticky
    `.topzone`; XCMG pads its `.sticky-top`.
-8. **Remove the status dot** from the hub header (online/offline indicator + its
-   small script).
+8. ✅ **Status dot removed** (v1.6.0) — `version.js` hides/removes it and shows the
+   version + a **force-reload button** in the header on every page instead.
 
 **Build:**
 9. **XCMG source attribution** — credit the *construction trenching manual* on the

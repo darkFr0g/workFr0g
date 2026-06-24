@@ -3,7 +3,7 @@
 // Update the CACHE_VERSION when deploying new releases
 // ──────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION  = 'v1.5.8';
+const CACHE_VERSION  = 'v1.6.0';
 const STATIC_CACHE   = `field-hub-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE  = `field-hub-dynamic-${CACHE_VERSION}`;
 
@@ -15,6 +15,7 @@ const PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.json',
+  './version.js',
   './xcmg-reference/index.html',
   './quick-reference/index.html',
   './gas-symbols/index.html',
