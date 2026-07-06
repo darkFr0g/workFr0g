@@ -190,6 +190,9 @@ Open items as of v1.5.0. Tick/trim as they ship.
     - ⏳ **REMINDER: get IP8 / IP9 procedure definitions** — placeholders ("summary
       to be added") are live in the new **Procedures** section; user to pull the
       exact wording from the procedure docs (no access at the moment).
+    - ⏳ **Add NGA and ITS** to the Glossary — user to supply the definitions.
+    - ⏳ **Next session: search for the "gas engineering lexicon"** — a source doc
+      to pull more glossary terms from.
 11. **Future sections** — more tools planned (TBD).
 
 **Parked (optional/minor):**
