@@ -99,7 +99,7 @@ look. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Version lives in two places, bump both every release** (currently **`v1.6.1`**):
+- **Version lives in two places, bump both every release** (currently **`v1.6.2`**):
   `APP_VERSION` in **`version.js`** (the single source — it injects the version
   into every page's header + footer and powers the in-header reload button) and
   `CACHE_VERSION` in `sw.js` (so devices re-fetch). No more per-page footer
@@ -191,8 +191,10 @@ Open items as of v1.5.0. Tick/trim as they ship.
       to be added") are live in the new **Procedures** section; user to pull the
       exact wording from the procedure docs (no access at the moment).
     - ⏳ **Add NGA, ITS, and TOR** to the Glossary — user to supply the definitions.
-    - ⏳ **Next session: search for the "gas engineering lexicon"** — a source doc
-      to pull more glossary terms from.
+    - ✅ **Gas Engineering Lexicon (GEL) obtained** — Con Ed spec-definitions
+      catalog (rev 1/29/2025, ~571 terms, from NY Code §255.3 + CFR §192.3). Pulled
+      CS/API/ASME. It does **NOT** contain TOR/NGA/ITS/IP8/IP9. Mine more terms
+      from it as the user requests (it's spec-writer jargon — curate, don't dump).
 11. **Future sections** — more tools planned (TBD).
 
 **Parked (optional/minor):**
