@@ -133,6 +133,29 @@ Static files, but the service worker needs `http://` (not `file://`). Serve the
 folder with any static server (Node/Python not guaranteed on the Windows dev
 machine — see the FieldLog repo's `.claude/` for a no-dependency static server).
 
+### Local dev on the Mac Mini (clone + run Claude locally)
+
+```bash
+# 1. Get the code (git installs via `xcode-select --install` if missing)
+cd ~/Dev 2>/dev/null || (mkdir -p ~/Dev && cd ~/Dev)
+git clone https://github.com/darkFr0g/workFr0g.git
+cd workFr0g
+
+# 2. Start a local Claude session rooted here — auto-loads this CLAUDE.md
+claude                       # install once with: npm install -g @anthropic-ai/claude-code
+
+# 3. Preview the PWA (needs http://, not file://)
+python3 -m http.server 8000  # then open http://localhost:8000/  (Ctrl-C to stop)
+
+# 4. Sync
+git pull                                  # get latest
+git add -A && git commit -m "…" && git push   # owner pushes straight to main (deploys)
+```
+
+Because `CLAUDE.md` is committed, a fresh local Claude inherits all the project
+context + backlog automatically. macOS uses LF endings (the Windows clone is CRLF)
+— harmless for these static files.
+
 ## Repo / clone notes
 
 - **Real git clone (use this):** `C:\Users\jflav\workFr0g\` — push to `main` to
