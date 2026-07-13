@@ -26,8 +26,10 @@ half. It supersedes the retired **GasReferenceTool** repo.
   schedule, pressure testing, conversions, UG clearances).
 - **Gas Symbols** (`gas-symbols/`) — gas-utility map symbols and meanings.
 - **Glossary** (`glossary/`) — gas terms, acronyms, pressure classes & suffix
-  keys; client-side search. Seeded as a starter set, **meant to grow** (more
-  sections/terms to come).
+  keys. **Items-style UX** (v1.7.0): sticky search + category filter pills +
+  one clean list of rows. Data is a `TERMS = [{t,d,c}]` array (t=term, d=def
+  HTML, c=category: pressure/materials/charging/suffix/procedures/nycdot/
+  acronyms) — add rows there to grow it. Meant to keep growing.
 
 Hub-tile + nav order is **Items → Charging → Quick → Symbols → Glossary**
 (Charging follows Items, by request). The hub `index.html` is the tile launcher.
@@ -99,7 +101,7 @@ look. Keep all pages on this system:
 - `sw.js`: **network-first** for HTML (so deploys go live when online),
   **cache-first** for static assets. Precache list (`PRECACHE_URLS`) names each
   tool's `index.html` by **relative `./...` path**.
-- **Version lives in two places, bump both every release** (currently **`v1.6.2`**):
+- **Version lives in two places, bump both every release** (currently **`v1.7.0`**):
   `APP_VERSION` in **`version.js`** (the single source — it injects the version
   into every page's header + footer and powers the in-header reload button) and
   `CACHE_VERSION` in `sw.js` (so devices re-fetch). No more per-page footer
