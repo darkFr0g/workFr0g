@@ -2,7 +2,7 @@
    Loaded by every page (no build step). On each release, update APP_VERSION
    here AND CACHE_VERSION in sw.js — that's it; every page's header/footer
    version updates automatically. */
-var APP_VERSION = 'v1.7.1';
+var APP_VERSION = 'v1.7.2';
 
 (function () {
   // Styles for the header-right cluster (injected so we don't duplicate CSS per page).
