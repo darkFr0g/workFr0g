@@ -101,6 +101,12 @@ svg.sym{display:block;}
 
 <div class="main">
 
+  <div style="padding:10px 12px;font-size:11px;color:var(--dim);line-height:1.5;">
+    Quick-reference sketches of the Con Ed <b>eGIS Gas M&amp;S Plates Symbology</b>
+    (rev. Aug 2026). Approximations for the field — the official plate legend is
+    authoritative. Note: <b>XHP</b> replaces the old <b>Transmission Pressure (TP)</b>.
+  </div>
+
   <!-- JOINTS -->
   <div class="section-label">Joints</div>
   <div class="sym-grid">
@@ -817,21 +823,29 @@ svg.sym{display:block;}
     </div>
   </div>
 
-  <!-- ABBREVIATIONS -->
+  <!-- ABBREVIATIONS (per eGIS Gas M&S Plates Symbology, rev. Aug 2026) -->
   <div class="section">
     <div class="section-label">Abbreviations &amp; Sealing Methods</div>
     <div class="abbr-grid">
       <div class="abbr-row"><div class="abbr-code">E.S.</div><div class="abbr-def">Epi-Seal</div></div>
+      <div class="abbr-row"><div class="abbr-code">I.S.</div><div class="abbr-def">Inner Seal</div></div>
       <div class="abbr-row"><div class="abbr-code">N.L.</div><div class="abbr-def">Never Leak</div></div>
+      <div class="abbr-row"><div class="abbr-code">A.L.</div><div class="abbr-def">Always Leak</div></div>
+      <div class="abbr-row"><div class="abbr-code">W.S.</div><div class="abbr-def">Weco Seal</div></div>
       <div class="abbr-row"><div class="abbr-code">A.S.</div><div class="abbr-def">Auto Seal — evenly spaced when all joints sealed</div></div>
       <div class="abbr-row"><div class="abbr-code">J.S.</div><div class="abbr-def">Joints Sealed by Internal Application of Compound</div></div>
+      <div class="abbr-row"><div class="abbr-code">R.J.</div><div class="abbr-def">Robosealed Joint</div></div>
+      <div class="abbr-row"><div class="abbr-code">CISBOT</div><div class="abbr-def">Joints Sealed Internally by Cast Iron Sealing Robot</div></div>
+      <div class="abbr-row"><div class="abbr-code">FUEL</div><div class="abbr-def">Fueling Method</div></div>
       <div class="abbr-row"><div class="abbr-code">SS</div><div class="abbr-def">Service Sealed</div></div>
+      <div class="abbr-row"><div class="abbr-code">S.P.A.</div><div class="abbr-def">Service Point Assembly</div></div>
       <div class="abbr-row"><div class="abbr-code">P.L.M.</div><div class="abbr-def">Pipe Line Marker</div></div>
       <div class="abbr-row"><div class="abbr-code">I.J.</div><div class="abbr-def">Insulating Joint</div></div>
       <div class="abbr-row"><div class="abbr-code">T.F.</div><div class="abbr-def">Transition Fitting</div></div>
       <div class="abbr-row"><div class="abbr-code">E.J.</div><div class="abbr-def">Expansion Joint</div></div>
       <div class="abbr-row"><div class="abbr-code">N.S.</div><div class="abbr-def">Non-Sectionalizing (Stopper Standpipe)</div></div>
       <div class="abbr-row"><div class="abbr-code">R.O.V.</div><div class="abbr-def">Remotely Operated Valve</div></div>
+      <div class="abbr-row"><div class="abbr-code">E.X.V.</div><div class="abbr-def">Electronic Expansion Valve</div></div>
       <div class="abbr-row"><div class="abbr-code">H.P.C.F.</div><div class="abbr-def">High Pressure Control Fitting</div></div>
       <div class="abbr-row"><div class="abbr-code">S.T.T.</div><div class="abbr-def">Special Tapping Tee</div></div>
       <div class="abbr-row"><div class="abbr-code">T.S.</div><div class="abbr-def">Thermofit / Thermoweld Sleeve</div></div>
@@ -840,15 +854,30 @@ svg.sym{display:block;}
       <div class="abbr-row"><div class="abbr-code">P.H.</div><div class="abbr-def">Posihold Coupling</div></div>
       <div class="abbr-row"><div class="abbr-code">A.T.</div><div class="abbr-def">Atmospheric Test Station</div></div>
       <div class="abbr-row"><div class="abbr-code">4-M.A.</div><div class="abbr-def">Test Station with 4 Magnesium Anodes (figure = count)</div></div>
+      <div class="abbr-row"><div class="abbr-code">C.P.</div><div class="abbr-def">Cathodic Protection</div></div>
+      <div class="abbr-row"><div class="abbr-code">E.M.S.O.S.</div><div class="abbr-def">Emergency Main Shut Off System</div></div>
+      <div class="abbr-row"><div class="abbr-code">S.M.Y.S.</div><div class="abbr-def">Specified Minimum Yield Strength</div></div>
+      <div class="abbr-row"><div class="abbr-code">N.Y.F.A.C.</div><div class="abbr-def">New York Facilities Agreement Mains</div></div>
+      <div class="abbr-row"><div class="abbr-code">C.I.</div><div class="abbr-def">Cast Iron</div></div>
+      <div class="abbr-row"><div class="abbr-code">(C)</div><div class="abbr-def">Coated Pipe</div></div>
       <div class="abbr-row"><div class="abbr-code">PE(B)</div><div class="abbr-def">Polyethylene — Black</div></div>
       <div class="abbr-row"><div class="abbr-code">PE(T)</div><div class="abbr-def">Polyethylene — Tan</div></div>
       <div class="abbr-row"><div class="abbr-code">N.T.S.</div><div class="abbr-def">Not to Scale</div></div>
       <div class="abbr-row"><div class="abbr-code">Area "U"</div><div class="abbr-def">Unstable Soil</div></div>
+    </div>
+  </div>
+
+  <!-- MAIN SYMBOLOGY / PRESSURE CLASSES (per eGIS legend) -->
+  <div class="section">
+    <div class="section-label">Main Symbology — Pressure Classes</div>
+    <div class="abbr-grid">
       <div class="abbr-row"><div class="abbr-code">L.P.</div><div class="abbr-def">Low Pressure</div></div>
       <div class="abbr-row"><div class="abbr-code">I.P.</div><div class="abbr-def">Intermediate Pressure</div></div>
       <div class="abbr-row"><div class="abbr-code">M.P.</div><div class="abbr-def">Medium Pressure</div></div>
       <div class="abbr-row"><div class="abbr-code">H.P.</div><div class="abbr-def">High Pressure</div></div>
-      <div class="abbr-row"><div class="abbr-code">T.P.</div><div class="abbr-def">Transmission Pressure</div></div>
+      <div class="abbr-row"><div class="abbr-code">X.H.P.</div><div class="abbr-def">Extra High Pressure — replaces the old "Transmission Pressure (T.P.)" on the Con Ed network</div></div>
+      <div class="abbr-row"><div class="abbr-code">S.P.</div><div class="abbr-def">Station Pressure</div></div>
+      <div class="abbr-row"><div class="abbr-code">Sleeve</div><div class="abbr-def">Main in Sleeve — all pressures</div></div>
     </div>
   </div>
 
