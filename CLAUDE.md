@@ -222,6 +222,9 @@ Open items as of v1.5.0. Tick/trim as they ship.
       CS/API/ASME. It does **NOT** contain TOR/NGA/ITS/IP8/IP9. Mine more terms
       from it as the user requests (it's spec-writer jargon — curate, don't dump).
 11. **Future sections** — more tools planned (TBD).
+    - ⏳ **STKY wheel** — captured from the field (2026-08-21); needs detail from
+      the user on what this is and where it lands (glossary term? XCMG item? a
+      Quick Reference lookup? a new tool?).
 
 **Parked (optional/minor):**
 12. **Auto-deploy GitHub Action** — needs a one-tap Pages-source flip in repo
