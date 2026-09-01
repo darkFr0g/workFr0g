@@ -225,6 +225,9 @@ Open items as of v1.5.0. Tick/trim as they ship.
     - ⏳ **STKY wheel** — captured from the field (2026-08-21); needs detail from
       the user on what this is and where it lands (glossary term? XCMG item? a
       Quick Reference lookup? a new tool?).
+    - ⏳ **"Rules we live by"** — captured 2026-09-01; likely a field
+      rules/policy quick-reference (the do's & don'ts the crew works by). Needs
+      the actual list + where it lands (new tool tile? a Quick Reference block?).
 
 **Parked (optional/minor):**
 12. **Auto-deploy GitHub Action** — needs a one-tap Pages-source flip in repo
